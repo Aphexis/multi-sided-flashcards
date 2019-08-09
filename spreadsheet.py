@@ -4,20 +4,11 @@ from googleapiclient.discovery import build
 from pprint import pprint
 from googleapiclient import discovery
 # import gspread
-# import google.auth
-# import pickle
-# import os.path
-# from google_auth_oauthlib.flow import InstalledAppFlow
 
-#credentials, project = google.auth.default(
-#    scopes=['https://www.spreadsheets.google.com/feeds'])
+### Set-up spreadsheet
 scopes = ['https://spreadsheets.google.com/feeds']
-#creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
-#client = gspread.authorize(creds)
-
 credentials = service_account.Credentials.from_service_account_file(
     'client_secret.json')
-
 scoped_credentials = credentials.with_scopes(
     ['https://www.spreadsheets.google.com/feeds'])
 service = build('sheets', 'v4', credentials=credentials)
@@ -25,21 +16,13 @@ service = build('sheets', 'v4', credentials=credentials)
 spreadsheet_id = '1gYgrieP-wwyfzlP0PAB9Q_woO0WsI614vAlG5F-czTA'
 range_name = 'Cards'
 
-# Call the Sheets API
-sheet = service.spreadsheets()
-result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
-values = result.get('values', [])
-#print(values)
+### Call the Sheets API (sample)
+# sheet = service.spreadsheets()
+# result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
+# values = result.get('values', [])
+# print(values)
 
-# get_set_body = {
-#   "dataFilters": [
-#     {
-#       object(DataFilter)
-#     }
-#   ],
-#   "includeGridData": False,
-# }
-
+### Flashcard Methods
 def get_cards(set_id):
     range_name = set_id + "_Cards"  # gets the set based on the defined range of the set_id
     sheet = service.spreadsheets()
@@ -55,7 +38,7 @@ def get_sides(set_id):
     values = result.get('values', [])
     print(values)
 
-def create_set(card_info, side_info):  # card and side info are 2D arrays
+def create_set(card_info, side_info):  # params are 2D arrays to be appended to the spreadsheet
     body_card = {
         'values': card_info
     }
@@ -68,15 +51,27 @@ def create_set(card_info, side_info):  # card and side info are 2D arrays
     result_side = service.spreadsheets().values().append(
         spreadsheetId=spreadsheet_id, range='Sides',
         valueInputOption='USER_ENTERED', body=body_side).execute()
-    #define named range based on given data
 
-#get_sides("One")
+    # TO-DO: define a named range based on data
+    # https://developers.google.com/sheets/api/samples/ranges
 
-addedCard = [['Three','$1.00','side','side'],['Three','side','side','side']]
-addedSide = [['Three','1','Side 1','1'],['Three','2','Side 2','2'],['Three','3','Side 3','3']]
+def build_set(set_name,card_text,side_names): # params are the info given when a set is created
+    #build the side_info array
+    rows, cols = (3, len(side_names))
+    side_info = [[0 for i in range(cols)] for j in range(rows)]
+    for i in range(rows):
+        for j in range(cols):
+            if j != 1:
+                side_info[i][j] = i
+            else:
+                side_info[i][j] = side_names[i]
+    #add set name header
+    named_side_info = [[set_name]] + side_info
+    card_info = [[set_name]] + card_text
+    create_set(card_info, named_side_info)
 
-create_set(addedCard,addedSide)
-
-result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
-values = result.get('values', [])
-pprint(values)
+### Testing
+setName = 'Three'
+card_text = [['side stuff','other side stuff','third side stuff'],['s1','s2','s3']]
+side_names = ['side1','side2','side3']
+build_set(setName,card_text,side_names)
