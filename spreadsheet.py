@@ -45,6 +45,8 @@ def create_set(card_info, side_info):  # params are 2D arrays to be appended to 
     cards_values = cards_result.get('values', [])
     sides_result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range='Sides').execute()
     sides_values = sides_result.get('values', [])
+
+    ## Build the request
     requests = [
         {
             "addNamedRange": {
@@ -78,8 +80,6 @@ def create_set(card_info, side_info):  # params are 2D arrays to be appended to 
     body = {'requests': requests}
     response = service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id,body=body).execute()
 
-    # https://developers.google.com/sheets/api/samples/ranges
-
     ### Add the flashcard data
     body_card = {
         'values': card_info
@@ -87,7 +87,7 @@ def create_set(card_info, side_info):  # params are 2D arrays to be appended to 
     body_side = {
         'values': side_info
     }
-    result_card = service.spreadsheets().values().append(  # TO-DO: replace with batch append?
+    result_card = service.spreadsheets().values().append(
         spreadsheetId=spreadsheet_id, range='Cards',
         valueInputOption='USER_ENTERED', body=body_card).execute()
     result_side = service.spreadsheets().values().append(
@@ -105,7 +105,6 @@ def build_set(set_name,card_text,side_names): # params are the info given when a
                 side_info[i][j] = i
             else:
                 side_info[i][j] = side_names[i]
-    #add set name header
     named_side_info = [[set_name]] + side_info
     card_info = [[set_name]] + card_text
     create_set(card_info, named_side_info)
