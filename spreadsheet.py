@@ -2,6 +2,7 @@ from __future__ import print_function
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from pprint import pprint
+from flashcard import Set
 from googleapiclient import discovery
 # import gspread
 
@@ -24,21 +25,46 @@ range_name = 'Cards'
 
 ### Flashcard Methods
 def get_cards(set_id):
-    range_name = set_id + "_Cards"  # gets the set based on the defined range of the set_id
+    range_name = "Cards_" + str(set_id) # gets the set based on the defined range of the set_id
     sheet = service.spreadsheets()
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
     print(values)
+    return values
 
 def get_sides(set_id):
-    range_name = set_id + "_Sides"  # gets the set based on the defined range of the set_id
+    range_name = "Sides_" + str(set_id)  # gets the set based on the defined range of the set_id
     sheet = service.spreadsheets()
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
     print(values)
+    return values
+
+def get_set_names():
+    range_name = 'Sets'
+    sheet = service.spreadsheets()
+    result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
+    values = result.get('values', [])
+    print(values[1:])
+    return values[1:]
+
+def get_all_sets():
+    set_ids = get_set_names()
+    sets = []
+    for i in range(len(set_ids)):
+        set_id = set_ids[i][0]
+        name = set_ids[i][1]
+        sides = get_sides(i+1)
+        cards = get_cards(i+1)
+        set = Set(set_id, name, sides, cards)
+        sets.append(set)
+        # pprint(set.test())
+    pprint(sets)
+    return sets
 
 def create_set(card_info, side_info):  # params are 2D arrays to be appended to the spreadsheet
+    # **MODIFY TO USE SET_ID!**
     ### Define a named range based on data
     ## Get the current size of the spreadsheet
     cards_result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range='Cards').execute() # TO-DO: use a batch get
@@ -94,6 +120,8 @@ def create_set(card_info, side_info):  # params are 2D arrays to be appended to 
         spreadsheetId=spreadsheet_id, range='Sides',
         valueInputOption='USER_ENTERED', body=body_side).execute()
 
+    ### TO-DO: Modify to include new 'Sets' sheet
+
 
 def build_set(set_name,card_text,side_names): # params are the info given when a set is created
     #build the side_info array
@@ -110,7 +138,9 @@ def build_set(set_name,card_text,side_names): # params are the info given when a
     create_set(card_info, named_side_info)
 
 ### Testing
-setName = 'Three'
-card_text = [['side stuff','other side stuff','third side stuff'],['s1','s2','s3']]
-side_names = ['side1','side2','side3']
-build_set(setName,card_text,side_names)
+# setName = 'Three'
+# card_text = [['side stuff','other side stuff','third side stuff'],['s1','s2','s3']]
+# side_names = ['side1','side2','side3']
+# build_set(setName,card_text,side_names)
+# get_sides('One')
+get_all_sets()
