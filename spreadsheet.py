@@ -30,7 +30,7 @@ def get_cards(set_id):
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
-    print(values)
+    # print(values)
     return values
 
 def get_sides(set_id):
@@ -38,7 +38,7 @@ def get_sides(set_id):
     sheet = service.spreadsheets()
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
-    print(values)
+    # print(values)
     return values
 
 def get_set_names():
@@ -46,7 +46,7 @@ def get_set_names():
     sheet = service.spreadsheets()
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
-    print(values[1:])
+    # print(values[1:])
     return values[1:]
 
 def get_all_sets():
