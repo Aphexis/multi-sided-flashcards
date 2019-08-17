@@ -60,7 +60,7 @@ def get_all_sets():
         set = Set(set_id, name, sides, cards)
         sets.append(set)
         # pprint(set.test())
-    pprint(sets)
+    # pprint(sets)
     return sets
 
 def create_set(card_info, side_info):  # params are 2D arrays to be appended to the spreadsheet
@@ -143,4 +143,4 @@ def build_set(set_name,card_text,side_names): # params are the info given when a
 # side_names = ['side1','side2','side3']
 # build_set(setName,card_text,side_names)
 # get_sides('One')
-get_all_sets()
+# print(get_all_sets()[0].num_cards)

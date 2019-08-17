@@ -4,6 +4,6 @@
     <h1>Your Sets</h1>
         {% import 'set_cards.html' as cards %}
     {% for set in sets %}
-        {{ cards.set_card(set.id_num) }}
+        {{ cards.set_card(set) }}
     {% endfor %}
 {% endblock %}

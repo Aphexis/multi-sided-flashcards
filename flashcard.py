@@ -4,3 +4,9 @@ class Set:
         self.name = name
         self.sides = sides
         self.cards = cards
+    
+    def num_cards(self):
+        return len(self.cards)
+    
+    def num_sides(self):
+        return len(self.sides)
