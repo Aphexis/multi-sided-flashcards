@@ -1,9 +1,30 @@
 {% extends "base.html" %}
 
+{% block head %}
+    {{super()}}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>Your Sets</h1>
         {% import 'set_cards.html' as cards %}
-    {% for set in sets %}
-        {{ cards.set_card(set) }}
-    {% endfor %}
+    <div class="card-deck">
+        {% for set in sets %}
+            <div class="col-md-4 mt-3">
+                <!-- <p>{{set.name}}</p>
+                <p>{{set.num_cards()}} cards</p>
+                <p>{{set.num_sides()}} sides</p> -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ set.name }}</h4>
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>                
+                        <a href= "set/{{ set.id_num }}" class="invisible_link stretched-link"><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p></a>
+                    </div>
+                </div>
+            </div>
+            
+            {#{{ cards.set_card(set) }}#}
+        {% endfor %}
+    </div>
 {% endblock %}
