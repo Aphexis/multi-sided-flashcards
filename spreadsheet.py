@@ -41,23 +41,28 @@ def get_sides(set_id):
     # print(values)
     return values
 
-def get_set_names():
+def get_sets(): # get sheet 'Sets'
     range_name = 'Sets'
     sheet = service.spreadsheets()
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
-    # print(values[1:])
     return values[1:]
 
+def get_set(set_id):
+    names = get_sets()
+    set = Set(set_id, names[set_id-1][1], names[set_id-1][2], get_sides(set_id), get_cards(set_id))
+    return set
+
 def get_all_sets():
-    set_ids = get_set_names()
+    set_ids = get_sets()
     sets = []
     for i in range(len(set_ids)):
         set_id = set_ids[i][0]
         name = set_ids[i][1]
+        description = set_ids[i][2]
         sides = get_sides(i+1)
         cards = get_cards(i+1)
-        set = Set(set_id, name, sides, cards)
+        set = Set(set_id, name, description, sides, cards)
         sets.append(set)
         # pprint(set.test())
     # pprint(sets)

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h1>{{set.name}}</h1>
+        </div>
+        <div class="col-sm text-right">
+            <a href="{{url_for('set.edit',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="{{url_for('set.view',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">View</button></a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+            {% for side in set.get_side_names() %}
+                <th>{{side}}</th>
+            {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(set.num_sides()) %}
+                <tr>
+                    {% for column in set.cards[i] %}
+                        <td>{{column}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
