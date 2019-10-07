@@ -2,6 +2,7 @@ from __future__ import print_function
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from pprint import pprint
+from flashcard import Set
 from googleapiclient import discovery
 # import gspread
 
@@ -24,27 +25,59 @@ range_name = 'Cards'
 
 ### Flashcard Methods
 def get_cards(set_id):
-    range_name = set_id + "_Cards"  # gets the set based on the defined range of the set_id
+    range_name = "Cards_" + str(set_id) # gets the set based on the defined range of the set_id
     sheet = service.spreadsheets()
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
-    print(values)
+    # print(values)
+    return values
 
 def get_sides(set_id):
-    range_name = set_id + "_Sides"  # gets the set based on the defined range of the set_id
+    range_name = "Sides_" + str(set_id)  # gets the set based on the defined range of the set_id
     sheet = service.spreadsheets()
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
     values = result.get('values', [])
-    print(values)
+    # print(values)
+    return values
+
+def get_sets(): # get sheet 'Sets'
+    range_name = 'Sets'
+    sheet = service.spreadsheets()
+    result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
+    values = result.get('values', [])
+    return values[1:]
+
+def get_set(set_id):
+    names = get_sets()
+    set = Set(set_id, names[set_id-1][1], names[set_id-1][2], get_sides(set_id), get_cards(set_id))
+    return set
+
+def get_all_sets():
+    set_ids = get_sets()
+    sets = []
+    for i in range(len(set_ids)):
+        set_id = set_ids[i][0]
+        name = set_ids[i][1]
+        description = set_ids[i][2]
+        sides = get_sides(i+1)
+        cards = get_cards(i+1)
+        set = Set(set_id, name, description, sides, cards)
+        sets.append(set)
+        # pprint(set.test())
+    # pprint(sets)
+    return sets
 
 def create_set(card_info, side_info):  # params are 2D arrays to be appended to the spreadsheet
+    # **MODIFY TO USE SET_ID!**
     ### Define a named range based on data
     ## Get the current size of the spreadsheet
     cards_result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range='Cards').execute() # TO-DO: use a batch get
     cards_values = cards_result.get('values', [])
     sides_result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range='Sides').execute()
     sides_values = sides_result.get('values', [])
+
+    ## Build the request
     requests = [
         {
             "addNamedRange": {
@@ -78,8 +111,6 @@ def create_set(card_info, side_info):  # params are 2D arrays to be appended to 
     body = {'requests': requests}
     response = service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id,body=body).execute()
 
-    # https://developers.google.com/sheets/api/samples/ranges
-
     ### Add the flashcard data
     body_card = {
         'values': card_info
@@ -87,12 +118,14 @@ def create_set(card_info, side_info):  # params are 2D arrays to be appended to 
     body_side = {
         'values': side_info
     }
-    result_card = service.spreadsheets().values().append(  # TO-DO: replace with batch append?
+    result_card = service.spreadsheets().values().append(
         spreadsheetId=spreadsheet_id, range='Cards',
         valueInputOption='USER_ENTERED', body=body_card).execute()
     result_side = service.spreadsheets().values().append(
         spreadsheetId=spreadsheet_id, range='Sides',
         valueInputOption='USER_ENTERED', body=body_side).execute()
+
+    ### TO-DO: Modify to include new 'Sets' sheet
 
 
 def build_set(set_name,card_text,side_names): # params are the info given when a set is created
@@ -105,13 +138,14 @@ def build_set(set_name,card_text,side_names): # params are the info given when a
                 side_info[i][j] = i
             else:
                 side_info[i][j] = side_names[i]
-    #add set name header
     named_side_info = [[set_name]] + side_info
     card_info = [[set_name]] + card_text
     create_set(card_info, named_side_info)
 
 ### Testing
-setName = 'Three'
-card_text = [['side stuff','other side stuff','third side stuff'],['s1','s2','s3']]
-side_names = ['side1','side2','side3']
-build_set(setName,card_text,side_names)
+# setName = 'Three'
+# card_text = [['side stuff','other side stuff','third side stuff'],['s1','s2','s3']]
+# side_names = ['side1','side2','side3']
+# build_set(setName,card_text,side_names)
+# get_sides('One')
+# print(get_all_sets()[0].num_cards)

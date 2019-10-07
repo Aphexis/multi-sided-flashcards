@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{super()}}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="title-text"><h1>Your Sets</h1></div>
+        {% import 'set_cards.html' as cards %}
+    <div class="card-deck">
+        {% for set in sets %}
+            <div class="col-md-4 mt-3">
+                <!-- <p>{{set.name}}</p>
+                <p>{{set.num_cards()}} cards</p>
+                <p>{{set.num_sides()}} sides</p> -->
+                <div class="card d">
+                    <div class="card-body shadow-sm">
+                        <h4 class="card-title">{{ set.name }}</h4>
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>                
+                        <a href= "set/{{ set.id_num }}" class="invisible_link stretched-link"><p class="card-text">{{ set.description }}</p></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{# TO-DO:
+    -make all card heights equal
+    -fix link appearance
+#}

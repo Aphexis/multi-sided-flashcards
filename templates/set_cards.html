@@ -1,0 +1,17 @@
+{% macro set_card(set) %}
+    <div class="col-md-4 mt-3">
+        <!-- <p>{{set.name}}</p>
+        <p>{{set.num_cards()}} cards</p>
+        <p>{{set.num_sides()}} sides</p> -->
+        <div class="card" style="background-color: #f8f8f8ff;">
+            <div class="card-body">
+                <h4 class="card-title">{{ set.name }}</h4>
+                <hr>
+                <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>                
+                <a href= "card/{{ set.id_num }}" class="stretched-link"><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                test</a>
+            </div>
+        </div>
+    </div>
+    
+{% endmacro %}
