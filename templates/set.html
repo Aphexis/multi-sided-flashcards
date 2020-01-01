@@ -21,7 +21,7 @@
         <tbody>
             {% for i in range(set.num_sides()) %}
                 <tr>
-                    {% for column in set.cards[i] %}
+                    {% for column in set_info[i] %}
                         <td>{{column}}</td>
                     {% endfor %}
                 </tr>

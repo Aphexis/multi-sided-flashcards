@@ -1,9 +1,8 @@
 from flask import Flask
 import os
 
-from sqlalchemy import create_engine
-engine = create_engine('mysql+pymysql://root:' + os.environ.get('password') + '@localhost/flashcards')
 
+#os.environ.get('password')
 from views.home import home_blueprint
 from views.set import set_blueprint
 

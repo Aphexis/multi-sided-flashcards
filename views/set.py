@@ -7,8 +7,9 @@ from queries import get_set
 def set(set_id):
     # sets = build_sets()
     set = get_set(set_id)
+    set_info = set.get_card_info()
     # return "you clicked set #" + str(set_id)
-    return render_template('set.html', set=set)
+    return render_template('set.html', set=set, set_info=set_info)
 
 @set_blueprint.route('/<int:set_id>/edit')
 def edit(set_id):

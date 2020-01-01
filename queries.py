@@ -1,8 +1,10 @@
 from flashcard import Set, Card
 from models import Set_SQL, Side_SQL, Card_SQL, Cell_SQL
 from sqlalchemy.orm import sessionmaker
-from app import engine
+# from app import engine
 
+from sqlalchemy import create_engine
+engine = create_engine('mysql+pymysql://root:' + 'root!$23' + '@localhost/flashcards')
 Session = sessionmaker(bind = engine)
 session = Session()
 
@@ -76,8 +78,12 @@ def get_set(set_id):  # builds a Set object for a given set_id
 # set = get_set(1)
 # print(set.name, set.description, set.cards)
 # print(set)
+# cards = set.get_card_info()
+# print(cards)
 
-
+# card = query_cards(1)[0]
+# print(card)
+# print(card.get_info(query_sides(1)))
 ### WRITE
 # create_set
 # edit_set
