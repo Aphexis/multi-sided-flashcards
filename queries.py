@@ -1,10 +1,10 @@
 from flashcard import Set, Card
 from models import Set_SQL, Side_SQL, Card_SQL, Cell_SQL
 from sqlalchemy.orm import sessionmaker
-# from app import engine
+import os
 
 from sqlalchemy import create_engine
-engine = create_engine('mysql+pymysql://root:' + 'root!$23' + '@localhost/flashcards')
+engine = create_engine('mysql+pymysql://root:' + os.environ.get('password') + '@localhost/flashcards')
 Session = sessionmaker(bind = engine)
 session = Session()
 

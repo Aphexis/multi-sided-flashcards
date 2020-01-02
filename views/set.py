@@ -16,7 +16,7 @@ def edit(set_id):
     set = get_set(set_id)
     return render_template('set-edit.html', set=set)
 
-@set_blueprint.route('/<int:set_id>/view')
-def view(set_id):
+@set_blueprint.route('/<int:set_id>/study')
+def study(set_id):
     set = get_set(set_id)
-    return render_template('set-view.html', set=set)
+    return render_template('set-study.html', set=set)

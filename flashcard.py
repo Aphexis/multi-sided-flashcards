@@ -24,7 +24,7 @@ class Set:
     def get_card_info(self):  # unordered
         cards_info = []
         for i in range(len(self.cards)):
-            card_info = [i] + self.cards[i].get_info(self.sides)
+            card_info = [i+1] + self.cards[i].get_info(self.sides)
             cards_info.append(card_info)
         return cards_info  # 2D array of card info
 
