@@ -1,11 +1,14 @@
-from flashcard import Set, Card
-from models import Set_SQL, Side_SQL, Card_SQL, Cell_SQL
+from .flashcard import Set, Card
+from .models import Set_SQL, Side_SQL, Card_SQL, Cell_SQL
 from sqlalchemy.orm import sessionmaker
 import os
+import pymysql
+# import mysqlclient
+# import mysql.connector
 
 from sqlalchemy import create_engine
-engine = create_engine('mysql+pymysql://root:' + os.environ.get('password') + '@localhost/flashcards')
-Session = sessionmaker(bind = engine)
+engine = create_engine('mysql://root:' + os.environ.get('password') + '@localhost/flashcards?auth_plugin=mysql_native_password')
+Session = sessionmaker(bind=engine)
 session = Session()
 
 # records = session.query(Side_SQL).filter_by(set_id=1).all()

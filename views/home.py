@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect
 home_blueprint = Blueprint('home', __name__, template_folder='templates')
 
-from queries import *
-from forms import CreateSet
+from ..queries import *
+# from forms import CreateSet
 from flask import request
 
 @home_blueprint.route('/')
@@ -20,7 +20,7 @@ def create_set():
     # if form.validate_on_submit():
     #     return redirect(url_for('submitted'))
     if request.method == 'POST':
-        return request.form['name'] + request.form['description']
+        return request.form['name'] + request.form['description'] + request.form['sidename[0]'] + request.form['sidename[1]']
         # return request.form
     return render_template('create.html')
 

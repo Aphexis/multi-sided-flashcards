@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 set_blueprint = Blueprint('set', __name__, template_folder='templates')
 
-from queries import get_set
+from ..queries import get_set
 
 @set_blueprint.route('/<int:set_id>') 
 def set(set_id):

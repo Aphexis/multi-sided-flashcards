@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
+    <script type="text/javascript" src="../static/javascript/create.js"></script>
     <h1>Create a set</h1>
     <form method="POST">
         <div class="form-group">
@@ -10,10 +11,38 @@
             <label for="description">Set Description</label>
             <input type="description" class="form-control" id="description" name="description" placeholder="Description">
         </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div class="form-group">
+            <input class="form-control" name="sidename[0]" placeholder="sidename[0]">
+            <input class="form-control" name="sidename[1]" placeholder="sidename[1]">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+{#    <table id="setTable">#}
+{#        <tbody id="tbody">#}
+{#          <tr>#}
+{#            <th class="tg-0lax">card</th>#}
+{#            <th class="tg-0lax">side1</th>#}
+{#            <th class="tg-0lax">side2</th>#}
+{#            <th class="tg-0lax">side3</th>#}
+{#          </tr>#}
+{#          <tr>#}
+{#            <td class="tg-0lax">card1</td>#}
+{#            <td class="tg-0lax">abc</td>#}
+{#            <td class="tg-0lax">def</td>#}
+{#            <td class="tg-0lax">ghi</td>#}
+{#          </tr>#}
+{#          <tr><td><button type="button" id="insertRow" onclick="addRow()">(+)</button></td></tr>#}
+{#        </tbody>#}
+{#    </table>#}
+
+    <form id="form">
+        <h3>Members</h3>
+        <button type="button" id="button">New member</button>
+        <br><label for="name">Name</label><label for="date">Date</label>
+        <div id="dynamic_form">
+            <span class="member_data"><input type="text" name="name"><input type="text" name="date"></span><br>
+        </div>
+        <input type="submit">
     </form>
 {% endblock %}
