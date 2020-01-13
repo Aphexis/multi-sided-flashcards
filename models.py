@@ -1,5 +1,3 @@
-
-# coding: utf-8
 from sqlalchemy import Column, ForeignKey, String
 from sqlalchemy.dialects.mysql import INTEGER
 from sqlalchemy.orm import relationship
