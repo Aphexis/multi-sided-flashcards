@@ -1,5 +1,5 @@
 # Multi-Sided Flashcards
-Web app designed to allow for the creation of flashcards with a flexible number of "sides" or categories of information.
+Web app (in progress) designed to allow for the creation of flashcards with a flexible number of "sides" or categories of information.
 
 The backend is built using Flask and Python, connected to a MySQL database using SQLAlchemy. The frontend is built using HTML, CSS, JavaScript, and Bootstrap. 
 
