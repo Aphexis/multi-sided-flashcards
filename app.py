@@ -1,8 +1,7 @@
 from flask import Flask
-import pymysql
 
-from .views.home import home_blueprint
-from .views.set import set_blueprint
+from views.home import home_blueprint
+from views.set import set_blueprint
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'temporary'

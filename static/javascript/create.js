@@ -9,7 +9,7 @@ function addRow(tableID) {
         let cellInput = document.createElement("input");
         cellInput.setAttribute('class', 'form-control');
         cellInput.setAttribute('name', cellName);
-        cellInput.setAttribute('placeholder', cellName);
+        // cellInput.setAttribute('placeholder', cellName);
         newCell.appendChild(cellInput);
     }
 }
@@ -28,7 +28,7 @@ function addCol(tableID) {
         if (i==0){
             cellInput.setAttribute('placeholder','Side ' + cols + ' Name')
         } else {
-            cellInput.setAttribute('placeholder', cellName);
+            // cellInput.setAttribute('placeholder', cellName);
         }
         newCell.appendChild(cellInput);
     }

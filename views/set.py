@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 set_blueprint = Blueprint('set', __name__, template_folder='templates')
 from sqlalchemy.orm import sessionmaker
-from ..queries import get_set, engine
+from queries import get_set, engine
 
 @set_blueprint.route('/<int:set_id>') 
 def set(set_id):
@@ -9,6 +9,7 @@ def set(set_id):
     session = Session()
     set = get_set(set_id, session)
     set_info = set.get_card_info()
+    print(set_info)
     # return "you clicked set #" + str(set_id)
     return render_template('set.html', set=set, set_info=set_info)
 

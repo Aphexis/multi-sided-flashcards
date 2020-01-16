@@ -1,11 +1,8 @@
-from .flashcard import Set, Card
-from .models import Set_SQL, Side_SQL, Card_SQL, Cell_SQL
+from flashcard import Set, Card
+from models import Set_SQL, Side_SQL, Card_SQL, Cell_SQL
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import insert
 import os
-import pymysql
-# import mysqlclient
-# import mysql.connector
 
 from sqlalchemy import create_engine
 engine = create_engine('mysql://root:' + os.environ.get('password') + '@localhost/flashcards?auth_plugin=mysql_native_password')
@@ -83,12 +80,8 @@ def process_form(form):
         else:
             side = {'set_id': set_id, 'name': form[field]}
             sides.append(side)
-
     if sides:
         side_result = conn.execute(insert(Side_SQL), sides)
-    # side_ids = [*query_sides(set_id)]
-    print("side_id:")
-    print(side_id)
 
     # create cards
     cards = []

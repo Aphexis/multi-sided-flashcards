@@ -19,15 +19,11 @@
                         <h4 class="card-title">{{ set.name }}</h4>
                         <hr>
                         <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>                
-                        <a href= "set/{{ set.id_num }}" class="invisible_link stretched-link"><p class="card-text">{{ set.description }}</p></a>
+                        <p class="card-text">{{ set.description }}</p>
+                        <a href= "set/{{ set.id_num }}" class="invisible_link stretched-link"></a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 {% endblock %}
-
-{# TO-DO:
-    -make all card heights equal
-    -fix link appearance
-#}
