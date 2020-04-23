@@ -1,0 +1,20 @@
+.hidden {
+    visibility: hidden;
+  /*display: none; !* Hide button *!*/
+}
+
+th:hover button {
+    visibility: visible;
+    margin: 0 auto;
+    display: block;
+    width: 100%
+   /*display: block; !* On :hover of div show button *!*/
+}
+
+td:hover button {
+    visibility: visible;
+    margin: 0 auto;
+    display: block;
+    width: 100%
+   /*display: block; !* On :hover of div show button *!*/
+}
