@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 set_blueprint = Blueprint('set', __name__, template_folder='templates')
 from sqlalchemy.orm import sessionmaker
-from queries import get_set, engine
+from queries import get_set, engine, delete_set
 
 @set_blueprint.route('/<int:set_id>') 
 def set(set_id):
@@ -26,3 +26,10 @@ def study(set_id):
     session = Session()
     set = get_set(set_id, session)
     return render_template('set-study.html', set=set)
+
+@set_blueprint.route('/<int:set_id>/delete')
+def delete(set_id):
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    delete_set(set_id, session)
+    return redirect(url_for('home.home'))

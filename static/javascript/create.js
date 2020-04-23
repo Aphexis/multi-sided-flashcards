@@ -23,6 +23,7 @@ function addRow(tableID) {
         cellInput.setAttribute('class', 'form-control');
         cellInput.setAttribute('name', cellName);
         cellInput.setAttribute('placeholder', cellName);
+        cellInput.setAttribute('maxlength', '1000')
         newCell.appendChild(cellInput);
     }
 }
@@ -50,8 +51,11 @@ function addCol(tableID) {
             cellInput.setAttribute('name', cellName);
             if (i == 1) {
                 cellInput.setAttribute('placeholder', 'Side ' + Number(cols - 1) + ' Name')
+                cellInput.setAttribute('maxlength', '255')
+                cellInput.setAttribute('required', '')
             } else {
                 cellInput.setAttribute('placeholder', cellName);
+                cellInput.setAttribute('maxlength', '1000')
             }
             newCell.appendChild(cellInput);
         }

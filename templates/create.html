@@ -2,18 +2,19 @@
 {% block head %}
     {{ super() }}
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/create.css') }}">
+    <script type="text/javascript" src="../static/javascript/create.js"></script>
 {% endblock %}
 {% block body %}
-    <script type="text/javascript" src="../static/javascript/create.js"></script>
     <h1>Create a set</h1>
     <form method="POST">
         <div class="form-group">
             <label for="name">Set Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" maxlength="255" required>
         </div>
         <div class="form-group">
             <label for="description">Set Description</label>
-            <input type="description" class="form-control" id="description" name="description" placeholder="Description">
+            <input type="description" class="form-control" id="description" name="description"
+                   placeholder="Description" maxlength="500" required>
         </div>
         <div class="form-group">
             <label for="cell[0][0]">Card Information</label>
@@ -21,19 +22,24 @@
                 <tbody id="tbody">
                 <tr>
                     <th class="tg-0lax"></th>
-                    <th class="onHover"><button type="button" class="hidden" id="removeCol[0]" onclick="removeCol('setTable', 0)">-</button></th>
-                    <th class="onHover"><button type="button" class="hidden" id="removeCol[1]" onclick="removeCol('setTable', 1)">-</button></th>
+                    <th class="onHover"><button type="button" class="hidden" id="removeCol[0]"
+                                                onclick="removeCol('setTable', 0)">-</button></th>
+                    <th class="onHover"><button type="button" class="hidden" id="removeCol[1]"
+                                                onclick="removeCol('setTable', 1)">-</button></th>
                 </tr>
                 <tr>
                     <th class="tg-0lax"></th>
-                    <th class="tg-0lax"><input class="form-control" name="cell[0][0]" placeholder="Side 1 Name"></th>
-                    <th class="tg-0lax"><input class="form-control" name="cell[0][1]" placeholder="Side 2 Name"></th>
+                    <th class="tg-0lax"><input class="form-control" name="cell[0][0]" placeholder="Side 1 Name"
+                                               maxlength="255" required></th>
+                    <th class="tg-0lax"><input class="form-control" name="cell[0][1]" placeholder="Side 2 Name"
+                                               maxlength="255" required></th>
                     <th class="tg-0lax"><button type="button" id="insertCol" onclick="addCol('setTable')">+</button></th>
                 </tr>
                 <tr>
-                    <td class="onHover"><button type="button" class="hidden" id="removeRow[1]" onclick="removeRow('setTable', 2)">-</button></td>
-                    <td class="tg-0lax"><input class="form-control" name="cell[1][0]"></td>
-                    <td class="tg-0lax"><input class="form-control" name="cell[1][1]"></td>
+                    <td class="onHover"><button type="button" class="hidden" id="removeRow[1]"
+                                                onclick="removeRow('setTable', 2)">-</button></td>
+                    <td class="tg-0lax"><input class="form-control" name="cell[1][0]" maxlength="1000"></td>
+                    <td class="tg-0lax"><input class="form-control" name="cell[1][1]" maxlength="1000"></td>
                     <td class="tg-0lax"></td>
                 </tr>
                 <tr><td><button type="button" id="insertRow" onclick="addRow('setTable')">+</button></td></tr>

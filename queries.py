@@ -112,4 +112,14 @@ def process_form(form):
         cells.append(cell)
     cells_result = conn.execute(insert(Cell_SQL), cells)
 
+### DELETE
+def delete_set(set_id, session):
+    sides = query_sides(set_id, session)
+    for side in sides:
+        session.query(Cell_SQL).filter_by(side_id=side).delete()
+    session.query(Side_SQL).filter_by(set_id=set_id).delete()
+    session.query(Card_SQL).filter_by(set_id=set_id).delete()
+    session.query(Set_SQL).filter_by(set_id=set_id).delete()
+    session.commit()
+
 

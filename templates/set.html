@@ -1,12 +1,18 @@
 {% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script type="text/javascript" src="../static/javascript/set.js"></script>
+{% endblock %}
 {% block body %}
     <div class="row">
-        <div class="col">
+        <div class="col-lg-8">
             <h1>{{set.name}}</h1>
+            <h5>{{ set.description }}</h5>
         </div>
         <div class="col-sm text-right">
             <a href="{{url_for('set.edit',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Edit</button></a>
             <a href="{{url_for('set.study',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Study</button></a>
+            <button type="button" class="btn btn-danger" onclick="delete_set()")>Delete</button>
         </div>
     </div>
 

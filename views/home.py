@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, redirect
+from flask import Blueprint, render_template, redirect, url_for
 home_blueprint = Blueprint('home', __name__, template_folder='templates')
 from sqlalchemy.orm import sessionmaker
 from queries import *
