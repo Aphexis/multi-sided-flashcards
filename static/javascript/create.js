@@ -64,12 +64,18 @@ function addCol(tableID) {
 
 // renumbers all fields appropriately (in case of row/col removal)
 function renumber(rows, numRows, numCols) {
-    for (var i=1; i<numRows-1; i++) {
+    console.log("renumbering");
+    console.log(numRows);
+    console.log(numCols);
+    for (var i=1; i<numRows; i++) {
+        console.log("on row "  + i);
         var currRow = rows[i];
         // console.log("editing a row");
-        // console.log(currRow);
+        console.log(currRow);
         for (var j=1; j<numCols-1; j++) {
+            console.log("on col " + j);
             let cellName = 'cell[' + Number(i-1) + '][' + Number(j - 1) + ']';
+            console.log(cellName);
             currRow.cells[j].children[0].setAttribute('name', cellName);
             if (i == 1) {
                 currRow.cells[j].children[0].setAttribute('placeholder', 'Side ' + j + ' Name')
@@ -104,11 +110,12 @@ function removeCol(tableID, col) {
     }
     if (window.confirm("You are removing a column. This will remove all data in the column. " +
         "Are you sure you want to do this?")) {
-        let rows = document.getElementById(tableID).rows
+        let rows = document.getElementById(tableID).rows;
         let numRows = document.getElementById(tableID).rows.length - 1;
         for (var i = 0; i < numRows; i++) {
             rows[i].deleteCell(col + 1);
         }
+        console.log("doing renumbering for cols");
         renumber(rows, numRows, cols);
     }
 }
