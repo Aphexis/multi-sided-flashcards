@@ -2,20 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bae56bb-e290-4faa-9463-57b349ffc0d2" name="Default Changelist" comment="add Set class, home template">
-      <change afterPath="$PROJECT_DIR$/static/styles/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/android-chrome-192x192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/android-chrome-512x512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/apple-touch-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/browserconfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/favicon-16x16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/favicon-32x32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/mstile-150x150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon/site.webmanifest" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/javascript/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/javascript/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/create.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/create.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/set-study.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set-study.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +58,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="ignore.virus.scanning.warn.message" value="true" />
+    <property name="jsx.switch.disabled" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
@@ -352,6 +346,8 @@
       <workItem from="1587584257525" duration="12378000" />
       <workItem from="1587670913390" duration="8569000" />
       <workItem from="1587690659107" duration="2214000" />
+      <workItem from="1587937714360" duration="1432000" />
+      <workItem from="1588004969518" duration="4900000" />
     </task>
     <task id="LOCAL-00001" summary="add Set class, home template">
       <created>1565840524830</created>
@@ -374,34 +370,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="add Set class, home template" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579146251805">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1579146251805" />
     <state x="372" y="39" key="FileChooserDialogImpl" timestamp="1585402702776">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="372" y="39" key="FileChooserDialogImpl/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1585402702776" />
-    <state width="1225" height="154" key="GridCell.Tab.0.bottom" timestamp="1587692881780">
+    <state width="1225" height="154" key="GridCell.Tab.0.bottom" timestamp="1587942359229">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1579150516036" />
-    <state width="1225" height="154" key="GridCell.Tab.0.bottom/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587692881780" />
-    <state width="1225" height="154" key="GridCell.Tab.0.center" timestamp="1587692881780">
+    <state width="1225" height="154" key="GridCell.Tab.0.bottom/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587942359229" />
+    <state width="1225" height="154" key="GridCell.Tab.0.center" timestamp="1587942359229">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1579150516035" />
-    <state width="1225" height="154" key="GridCell.Tab.0.center/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587692881780" />
-    <state width="1225" height="154" key="GridCell.Tab.0.left" timestamp="1587692881780">
+    <state width="1225" height="154" key="GridCell.Tab.0.center/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587942359229" />
+    <state width="1225" height="154" key="GridCell.Tab.0.left" timestamp="1587942359229">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1579150516035" />
-    <state width="1225" height="154" key="GridCell.Tab.0.left/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587692881780" />
-    <state width="1225" height="154" key="GridCell.Tab.0.right" timestamp="1587692881780">
+    <state width="1225" height="154" key="GridCell.Tab.0.left/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587942359229" />
+    <state width="1225" height="154" key="GridCell.Tab.0.right" timestamp="1587942359229">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1579150516036" />
-    <state width="1225" height="154" key="GridCell.Tab.0.right/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587692881780" />
+    <state width="1225" height="154" key="GridCell.Tab.0.right/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587942359229" />
     <state width="1225" height="188" key="GridCell.Tab.1.bottom" timestamp="1587692881773">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -418,14 +406,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1225" height="188" key="GridCell.Tab.1.right/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587692881772" />
+    <state x="238" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588013096289">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="238" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588013096289" />
     <state x="417" y="238" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587677977121">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="417" y="238" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587677977121" />
+    <state x="0" y="0" width="891" height="766" key="find.popup" timestamp="1588013354747">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="0" width="891" height="766" key="find.popup/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588013354747" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Flashcards$spreadsheet.coverage" NAME="spreadsheet Coverage Results" MODIFIED="1577673934479" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Flashcards$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1587690673439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Flashcards$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1588004995531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Flashcards$Flask.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1578633285123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Flashcards$queries.coverage" NAME="queries Coverage Results" MODIFIED="1578882464014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Flashcards$run.coverage" NAME="run Coverage Results" MODIFIED="1577676585870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

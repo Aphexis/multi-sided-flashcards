@@ -22,10 +22,18 @@
                 <tbody id="tbody">
                 <tr>
                     <th class="tg-0lax"></th>
-                    <th class="onHover"><button type="button" class="hidden" id="removeCol[0]"
-                                                onclick="removeCol('setTable', 0)">-</button></th>
-                    <th class="onHover"><button type="button" class="hidden" id="removeCol[1]"
-                                                onclick="removeCol('setTable', 1)">-</button></th>
+                    <th class="onHover">
+                        <svg class="bi bi-dash-circle-fill hidden" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                            id="removeCol[0]" onclick="removeCol('setTable', 0)">
+                          <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z" clip-rule="evenodd"/>
+                        </svg>
+                    </th>
+                    <th class="onHover">
+                        <svg class="bi bi-dash-circle-fill hidden" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                            id="removeCol[1]" onclick="removeCol('setTable', 1)">
+                          <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z" clip-rule="evenodd"/>
+                        </svg>
+                    </th>
                 </tr>
                 <tr>
                     <th class="tg-0lax"></th>
@@ -33,16 +41,30 @@
                                                maxlength="255" required></th>
                     <th class="tg-0lax"><input class="form-control" name="cell[0][1]" placeholder="Side 2 Name"
                                                maxlength="255" required></th>
-                    <th class="tg-0lax"><button type="button" id="insertCol" onclick="addCol('setTable')">+</button></th>
+                    <th class="tg-0lax">
+                        <svg class="bi bi-plus-circle-fill" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                             id="insertCol" onclick="addCol('setTable')">
+                          <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM8.5 4a.5.5 0 00-1 0v3.5H4a.5.5 0 000 1h3.5V12a.5.5 0 001 0V8.5H12a.5.5 0 000-1H8.5V4z" clip-rule="evenodd"/>
+                        </svg>
+                    </th>
                 </tr>
                 <tr>
-                    <td class="onHover"><button type="button" class="hidden" id="removeRow[1]"
-                                                onclick="removeRow('setTable', 2)">-</button></td>
+                    <td class="onHover">
+                        <svg class="bi bi-dash-circle-fill hidden" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                            id="removeRow[1]" onclick="removeRow('setTable', 2)">
+                          <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z" clip-rule="evenodd"/>
+                        </svg>
+                    </td>
                     <td class="tg-0lax"><input class="form-control" name="cell[1][0]" maxlength="1000"></td>
                     <td class="tg-0lax"><input class="form-control" name="cell[1][1]" maxlength="1000"></td>
                     <td class="tg-0lax"></td>
                 </tr>
-                <tr><td><button type="button" id="insertRow" onclick="addRow('setTable')">+</button></td></tr>
+                <tr><td>
+                    <svg class="bi bi-plus-circle-fill" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                         id="insertRow" onclick="addRow('setTable')">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM8.5 4a.5.5 0 00-1 0v3.5H4a.5.5 0 000 1h3.5V12a.5.5 0 001 0V8.5H12a.5.5 0 000-1H8.5V4z" clip-rule="evenodd"/>
+                    </svg>
+                </td></tr>
                 </tbody>
             </table>
         </div>

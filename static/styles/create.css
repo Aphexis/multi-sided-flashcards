@@ -1,20 +1,25 @@
-.hidden {
+.bi.hidden {
     visibility: hidden;
-  /*display: none; !* Hide button *!*/
 }
 
-th:hover button {
+th:hover .bi.hidden {
     visibility: visible;
     margin: 0 auto;
     display: block;
     width: 100%
-   /*display: block; !* On :hover of div show button *!*/
 }
 
-td:hover button {
+td:hover .bi.hidden {
     visibility: visible;
     margin: 0 auto;
     display: block;
     width: 100%
-   /*display: block; !* On :hover of div show button *!*/
+}
+
+#insertCol {
+    margin-left: 25%;
+}
+
+.bi:hover {
+    fill: gray;
 }

@@ -4,15 +4,24 @@ function addRow(tableID) {
     let newRow = tableRef.insertRow(rows-1);
     let cols = document.getElementById(tableID).rows[0].cells.length;
     let remove = newRow.insertCell(0);
-    let button = document.createElement("button");
+    let button = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    let path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 
     // set the remove button
-    remove.setAttribute('class', 'onHover');
-    button.setAttribute('type', 'button');
-    button.innerHTML = '-';
-    button.setAttribute('class', 'hidden');
+    remove.setAttribute('class', 'onHover')
+    button.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+    button.setAttribute('class', 'bi bi-dash-circle-fill hidden');
+    button.setAttribute('width', '1.3em');
+    button.setAttribute('height', '1.3em');
+    button.setAttribute('viewBox', '0 0 16 16');
+    button.setAttribute('fill', 'lightsteelblue');
+    // button.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    path.setAttribute("fill-rule", "evenodd");
+    path.setAttribute("d",'M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z');
+    path.setAttribute('clip-rule', 'evenodd')
     button.setAttribute('id', 'removeRow[' + Number(rows-1) + ']');
     button.addEventListener("click", function() {removeRow(tableID, rows-1)} );
+    button.appendChild(path);
     remove.appendChild(button);
 
     // make the form fields
@@ -36,13 +45,21 @@ function addCol(tableID) {
         let row = document.getElementById(tableID).rows[i];
         let newCell = row.insertCell(cols-1);
         if (i==0) { // set the remove button
-            let button = document.createElement("button");
-            newCell.setAttribute('class', 'onHover');
-            button.setAttribute('type', 'button');
-            button.innerHTML = '-';
-            button.setAttribute('class', 'hidden');
+            let button = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            let path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+            newCell.setAttribute('class', 'onHover')
+            button.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+            button.setAttribute('class', 'bi bi-dash-circle-fill hidden');
+            button.setAttribute('width', '1.3em');
+            button.setAttribute('height', '1.3em');
+            button.setAttribute('viewBox', '0 0 16 16');
+            button.setAttribute('fill', 'lightsteelblue');
             button.setAttribute('id', 'removeRow[' + rows-1 + ']');
             button.addEventListener("click", function() {removeCol(tableID, cols-2)});
+            path.setAttribute("fill-rule", "evenodd");
+            path.setAttribute("d",'M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z');
+            path.setAttribute('clip-rule', 'evenodd')
+            button.appendChild(path);
             newCell.appendChild(button);
         } else { // set form fields
             let cellName = 'cell[' + Number(i-1) + '][' + Number(cols - 2) + ']';
