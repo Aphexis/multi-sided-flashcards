@@ -1,0 +1,30 @@
+#body {
+    height:70vh;
+    justify-content: space-between;
+}
+
+.row {
+    height: 100%;
+    justify-content: space-between;
+}
+
+.col-lg-8 {
+    height: 100%;
+}
+
+.middle-col {
+    width: 80%;
+    height: 100%;
+}
+
+.card {
+    height: 90%;
+    /*box-sizing: border-box;*/
+}
+
+/*.card {*/
+/*    border: 1px solid lightslategray;*/
+/*    border-radius: 5px;*/
+/*    box-shadow: 0 .25rem .5rem rgba(0,0,0,.075);*/
+/*    height: 100%;*/
+/*}*/
