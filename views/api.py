@@ -33,10 +33,14 @@ def info():
     set = get_set(set_id, session)
     num_cards = set.num_cards()
     num_sides = set.num_sides()
+    sides = set.get_side_names()
+    cards = set.get_card_info()
     session.close()
     return json.jsonify({
         'num_cards': num_cards,
         'num_sides': num_sides,
+        'sides': sides,
+        'cards': cards,
     })
 
 

@@ -1,23 +1,25 @@
 {% extends "base.html" %}
 {% block head %}
     {{ super() }}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/set-study.css') }}">
     <script type="text/javascript" src="{{ url_for('static',filename='javascript/set-study.js') }}"></script>
+
 {% endblock %}
 {% block body %}
-    <div class="container">
+    <div class="container" id="options">
         <div class="row">
             <div>
                 <a href="{{url_for('set.set',set_id=set.id_num)}}"><button type="button" class="btn btn-secondary">Exit</button></a>
             </div>
             <div class="float-right">
-                <button type="button" class="btn btn-light">Shuffle</button>
+                <button type="button" class="btn btn-light" id="shuffle">Shuffle</button>
                 <button type="button" class="btn btn-light" data-toggle="modal" data-target="#infoModal">
                     <svg class="bi bi-question-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM6.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z" clip-rule="evenodd"/>
                     </svg>
                 </button>
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#settingsModal">
                     <svg class="bi bi-gear-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 01-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 01.872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 012.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 012.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 01.872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 01-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 01-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 100-5.86 2.929 2.929 0 000 5.858z" clip-rule="evenodd"/>
                     </svg>
@@ -26,7 +28,7 @@
         </div>
     </div>
     <div class="container" id="body">
-        <div class="row align-items-center">
+        <div class="row align-items-center" id="bodyRow">
             <button type="button" class="btn btn-light" id="prevCard">
                 <svg class="bi bi-caret-left-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 00-1.659-.753l-5.48 4.796a1 1 0 000 1.506z"/>
@@ -34,8 +36,8 @@
             </button>
             <div class="middle-col">
                 <h6 class="mb-4 text-muted">
-                    <span class="float-left">Next: {{ set.get_side_names()[2] }}</span>
-                    <span class="float-right">Side 1/{{ set.num_sides() }}</span>
+                    <span class="float-left" id="nextSideText">Next: {{ set.get_side_names()[2] }}</span>
+                    <span class="float-right" id="sideProgress">Side 1/{{ set.num_sides() }}</span>
                 </h6>
                 <div class="card align-center shadow-sm">
                     <div class="card-header text-center" id="prevSide">Previous Side
@@ -65,6 +67,40 @@
     <div class="progress position-relative" style="height: 22px">
       <div class="progress-bar" role="progressbar"
            style="width: {{ 1/ set.num_cards() *100 }}%" aria-valuenow="{{ 1/ set.num_cards() *100 }}" aria-valuemin="0" aria-valuemax="100">1/{{ set.num_cards() }} cards studied</div>
+    </div>
+
+    {#    Settings Modal #}
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h6>Reorder Sides:</h6>
+            <ul class="list-group" id="sideList">
+                {% for i in range(1, set.get_side_names()|length) %}
+                    <li class="list-group-item" data-id="{{ i }}">
+                        <svg class="bi bi-arrows-move" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M6.5 8a.5.5 0 00-.5-.5H1.5a.5.5 0 000 1H6a.5.5 0 00.5-.5z" clip-rule="evenodd"/>
+                          <path fill-rule="evenodd" d="M3.854 5.646a.5.5 0 00-.708 0l-2 2a.5.5 0 000 .708l2 2a.5.5 0 00.708-.708L2.207 8l1.647-1.646a.5.5 0 000-.708zM9.5 8a.5.5 0 01.5-.5h4.5a.5.5 0 010 1H10a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                          <path fill-rule="evenodd" d="M12.146 5.646a.5.5 0 01.708 0l2 2a.5.5 0 010 .708l-2 2a.5.5 0 01-.708-.708L13.793 8l-1.647-1.646a.5.5 0 010-.708zM8 9.5a.5.5 0 00-.5.5v4.5a.5.5 0 001 0V10a.5.5 0 00-.5-.5z" clip-rule="evenodd"/>
+                          <path fill-rule="evenodd" d="M5.646 12.146a.5.5 0 000 .708l2 2a.5.5 0 00.708 0l2-2a.5.5 0 00-.708-.708L8 13.793l-1.646-1.647a.5.5 0 00-.708 0zM8 6.5a.5.5 0 01-.5-.5V1.5a.5.5 0 011 0V6a.5.5 0 01-.5.5z" clip-rule="evenodd"/>
+                          <path fill-rule="evenodd" d="M5.646 3.854a.5.5 0 010-.708l2-2a.5.5 0 01.708 0l2 2a.5.5 0 01-.708.708L8 2.207 6.354 3.854a.5.5 0 01-.708 0z" clip-rule="evenodd"/>
+                        </svg>
+                        {{ set.get_side_names()[i] }}</li>
+                {% endfor %}
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     {#    Info Modal #}
@@ -99,7 +135,7 @@
                           <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v5a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                         </svg>: next side</div>
                     <div>R: restart</div>
-                    <div>S: shuffle (not yet done)</div>
+                    <div>S: shuffle</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
