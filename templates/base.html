@@ -30,15 +30,39 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 {#<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a> #}
-                <a class="nav-item nav-link" href="/create">Create</a>
+                <li class="nav item">
+                    <a class="nav-item nav-link" href="{{ url_for('home.create_set') }}">Create</a>
+                </li>
+            </ul>
 {#                <button type="button" class="btn btn-primary">Create</button>#}
 {#                <a class="nav-item nav-link" href="#">Other Options?</a>#}
-            </div>
+                {% if current_user.is_authenticated %}
+                    <span class="dropdown show">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ current_user.name }}
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/logout">Log out</a>
+                      </div>
+                    </span>
+                {% else %}
+                    <a class="navbar-text text-right" href="{{ url_for('auth.signup') }}">Sign up!</a>
+                {% endif %}
         </div>
     </nav>
     <div class="container" id="baseContainer">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class=flashes>
+            {% for message in messages %}
+              <p class="text-danger">{{ message }}</p>
+            {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
         {% block body %}
         {% endblock %}
     </div>

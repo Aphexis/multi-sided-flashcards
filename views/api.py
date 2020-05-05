@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, json
 api_blueprint = Blueprint('api', __name__, template_folder='templates')
 from sqlalchemy.orm import sessionmaker
-from queries import get_set, engine
+from queries import get_set
 
 @api_blueprint.route('/card', methods=['GET'])
 def card():
@@ -10,10 +10,10 @@ def card():
     side_num = int(request.args.get('side')) # side number, where the first side is #1
     card_num = int(request.args.get('card')) # card number, where the first card is #0
 
-    Session = sessionmaker(bind=engine)
-    session = Session()
+    # Session = sessionmaker(bind=engine)
+    # session = Session()
     set = get_set(set_id, session)
-    session.close()
+    # session.close()
 
     sides = set.get_side_names()
     cards = set.get_card_info()
@@ -28,14 +28,14 @@ def card():
 @api_blueprint.route('/set_info', methods=['GET'])
 def info():
     set_id = request.args.get('set')
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    set = get_set(set_id, session)
+    # Session = sessionmaker(bind=engine)
+    # session = Session()
+    set = get_set(set_id)
     num_cards = set.num_cards()
     num_sides = set.num_sides()
     sides = set.get_side_names()
     cards = set.get_card_info()
-    session.close()
+    # session.close()
     return json.jsonify({
         'num_cards': num_cards,
         'num_sides': num_sides,
@@ -47,9 +47,9 @@ def info():
 @api_blueprint.route('/study_done', methods=['GET'])
 def done():
     set_id = request.args.get('set')
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    set = get_set(set_id, session)
+    # Session = sessionmaker(bind=engine)
+    # session = Session()
+    set = get_set(set_id)
     num_cards = set.num_cards()
-    session.close()
+    # session.close()
     return render_template('study-done.html', set_id=set_id, num_cards=num_cards)

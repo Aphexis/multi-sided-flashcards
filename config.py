@@ -2,7 +2,9 @@ import os
 
 
 class Config:
-    DEBUG = True
+    FLASK_DEBUG = True
     DEVELOPMENT = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root!$23@localhost/flashcards'
+    SECRET_KEY = 'temporary'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:' + os.environ.get('password') + '@localhost/flashcards'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = True
