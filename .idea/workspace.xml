@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bae56bb-e290-4faa-9463-57b349ffc0d2" name="Default Changelist" comment="add Set class, home template">
+      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flashcard.py" beforeDir="false" afterPath="$PROJECT_DIR$/flashcard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/queries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/javascript/set.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/javascript/set.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/set.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign-up.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign-up.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/set.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/set.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,7 +385,8 @@
       <workItem from="1588362865232" duration="3754000" />
       <workItem from="1588620410383" duration="1197000" />
       <workItem from="1588624405251" duration="12205000" />
-      <workItem from="1588705987115" duration="8999000" />
+      <workItem from="1588705987115" duration="9097000" />
+      <workItem from="1588721125578" duration="521000" />
     </task>
     <task id="LOCAL-00001" summary="add Set class, home template">
       <created>1565840524830</created>
@@ -425,10 +413,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588706065360" />
-    <state x="340" y="126" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588641927321">
+    <state x="340" y="126" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588721618839">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="340" y="126" key="#com.intellij.fileTypes.FileTypeChooser/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588641927321" />
+    <state x="340" y="126" key="#com.intellij.fileTypes.FileTypeChooser/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588721618839" />
     <state x="309" y="29" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588191771587">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -441,22 +429,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="372" y="39" key="FileChooserDialogImpl/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1585402702776" />
-    <state width="1225" height="154" key="GridCell.Tab.0.bottom" timestamp="1588707870854">
+    <state width="1225" height="154" key="GridCell.Tab.0.bottom" timestamp="1588716889260">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.bottom/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588707870854" />
-    <state width="1225" height="154" key="GridCell.Tab.0.center" timestamp="1588707870854">
+    <state width="1225" height="154" key="GridCell.Tab.0.bottom/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588716889260" />
+    <state width="1225" height="154" key="GridCell.Tab.0.center" timestamp="1588716889260">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.center/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588707870854" />
-    <state width="1225" height="154" key="GridCell.Tab.0.left" timestamp="1588707870854">
+    <state width="1225" height="154" key="GridCell.Tab.0.center/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588716889260" />
+    <state width="1225" height="154" key="GridCell.Tab.0.left" timestamp="1588716889260">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.left/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588707870854" />
-    <state width="1225" height="154" key="GridCell.Tab.0.right" timestamp="1588707870854">
+    <state width="1225" height="154" key="GridCell.Tab.0.left/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588716889260" />
+    <state width="1225" height="154" key="GridCell.Tab.0.right" timestamp="1588716889260">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.right/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588707870854" />
+    <state width="1225" height="154" key="GridCell.Tab.0.right/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588716889260" />
     <state width="1225" height="188" key="GridCell.Tab.1.bottom" timestamp="1587692881773">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
