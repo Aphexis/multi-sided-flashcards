@@ -34,4 +34,5 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
+    <div>Already a user? <a href="{{ url_for('auth.login') }}">Click to log in!</a></div>
 {% endblock %}

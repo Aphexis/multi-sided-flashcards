@@ -18,7 +18,7 @@ from views.set import set_blueprint
 from views.api import api_blueprint
 from views.auth import auth_blueprint
 
-app.register_blueprint(home_blueprint, url_prefix = '/test')
+app.register_blueprint(home_blueprint)
 app.register_blueprint(set_blueprint, url_prefix = '/set')
 app.register_blueprint(api_blueprint, url_prefix = '/api')
 app.register_blueprint(auth_blueprint)

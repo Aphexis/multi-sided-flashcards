@@ -38,32 +38,54 @@ def query_sides(set_id):  # returns a dictionary of {id_name: [order, name, set_
         sides[record.side_id] = [record.side_order, record.name, record.set_id]
     return sides
 
-def query_sets():  # returns an array of all sets in [set_id, name, description]
-    records = db.session.query(Set_SQL).all()
+def query_sets(records):  # returns an array of all sets in [set_id, name, description, user_id, public]
+    # records = db.session.query(Set_SQL).all()
     sets = []
     for record in records:
-        set = [record.set_id, record.name, record.description]
+        user = db.session.query(User).filter_by(id=record.user_id).one()
+        set = [record.set_id, record.name, record.description, record.user_id, record.public, user.name]
         sets.append(set)
     return sets
 
-def build_sets():  # builds an array of Set objects for all sets in db using query methods
-    records = query_sets()
+def query_sets_public(user):
+    records = db.session.query(Set_SQL).filter_by(public=True).all()
+    all_records = query_sets(records)
+    if user.is_authenticated:
+        for record in all_records:
+            if record[3] == user.id:
+                all_records.remove(record)
+    return all_records
+
+def query_sets_private(user):
+    records = db.session.query(Set_SQL).filter_by(user_id=user.id).all()
+    return query_sets(records)
+
+def build_sets(records):  # builds an array of Set objects for all sets in db using query methods
+    # records = query_sets()
     sets = []
     for record in records:
-        set = Set(record[0], record[1], record[2], query_sides(record[0]), query_cards(record[0]))
+        set = Set(record[0], record[1], record[2], query_sides(record[0]), query_cards(record[0]), record[3], record[4], record[5])
         sets.append(set)
     return sets
+
+def build_sets_public(user):
+    return build_sets(query_sets_public(user))
+
+def build_sets_private(user):
+    return build_sets(query_sets_private(user))
 
 def get_set(set_id):  # builds a Set object for a given set_id
     record = db.session.query(Set_SQL).filter_by(set_id=set_id).one()
-    set = Set(record.set_id, record.name, record.description, query_sides(record.set_id), query_cards(record.set_id))
+    user = db.session.query(User).filter_by(id=record.user_id).one()
+    set = Set(record.set_id, record.name, record.description, query_sides(record.set_id), query_cards(record.set_id), record.user_id, record.public, user.name)
     return set
 
 
 ### WRITE
-def process_form(form):
+def process_form(form, user):
     # create set
-    ins = Set_SQL(name=form['name'], description=form['description'])
+    public = True if form.getlist('public') else False
+    ins = Set_SQL(name=form['name'], description=form['description'], user=user, public=public)
     db.session.add(ins)
     db.session.commit()
     set_id = ins.set_id

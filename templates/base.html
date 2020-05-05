@@ -25,16 +25,18 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ url_for('home.home') }}">
             <img src="{{ url_for('static',filename='favicon/favicon-32x32.png') }}">
-             Flashcards</a>
+             Flexcards</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 {#<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a> #}
+                {% if current_user.is_authenticated %}
                 <li class="nav item">
                     <a class="nav-item nav-link" href="{{ url_for('home.create_set') }}">Create</a>
                 </li>
+                {% endif %}
             </ul>
 {#                <button type="button" class="btn btn-primary">Create</button>#}
 {#                <a class="nav-item nav-link" href="#">Other Options?</a>#}
@@ -49,16 +51,25 @@
                       </div>
                     </span>
                 {% else %}
-                    <a class="navbar-text text-right" href="{{ url_for('auth.signup') }}">Sign up!</a>
+                    <a class="navbar-text text-right" href="{{ url_for('auth.login') }}">Log in</a>
                 {% endif %}
         </div>
     </nav>
     <div class="container" id="baseContainer">
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(category_filter=["error"]) %}
           {% if messages %}
             <div class=flashes>
             {% for message in messages %}
-              <p class="text-danger">{{ message }}</p>
+              <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        {% with messages = get_flashed_messages(category_filter=["success"]) %}
+          {% if messages %}
+            <div class=flashes>
+            {% for message in messages %}
+              <div class="alert alert-success">{{ message }}</div>
             {% endfor %}
             </div>
           {% endif %}

@@ -10,17 +10,17 @@ def root():
     return redirect(url_for('home.home'))
 
 @home_blueprint.route('/home')
-@login_required
 def home():
     # Session = sessionmaker(bind=engine)
     # session = Session()
-    sets = build_sets()
-    return render_template('home.html', sets=sets)
+    public_sets = build_sets_public(current_user)
+    private_sets = build_sets_private(current_user) if current_user.is_authenticated else None
+    return render_template('home.html', public_sets=public_sets, private_sets=private_sets, current_user=current_user)
 
 @home_blueprint.route('/create', methods=['GET', 'POST'])
 @login_required
 def create_set():
     if request.method == 'POST':
-        set_id = process_form(request.form)
+        process_form(request.form, current_user)
         return redirect(url_for('home.home'))
     return render_template('create.html')

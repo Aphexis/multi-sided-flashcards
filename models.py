@@ -16,9 +16,12 @@ class Set_SQL(db.Model):
     __tablename__ = 'sets'
 
     set_id = db.Column(db.INTEGER(), primary_key=True)
-    name = db.Column(db.String(255))
+    name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(500))
+    user_id = db.Column(db.ForeignKey('users.id'), nullable=False)
+    public = db.Column(db.Boolean, nullable=False)
 
+    user = db.relationship('User')
 
 class Card_SQL(db.Model):
     __tablename__ = 'cards'
@@ -88,7 +91,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}>'.format(self.name)
 
 @login.user_loader
 def load_user(id):

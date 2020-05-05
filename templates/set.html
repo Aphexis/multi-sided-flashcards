@@ -7,15 +7,21 @@
     <div class="row">
         <div class="col-lg-8">
             <h1>{{set.name}}</h1>
-            <h5>{{ set.description }}</h5>
         </div>
         <div class="col-sm text-right">
-            <a href="{{url_for('set.edit',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Edit</button></a>
-            <a href="{{url_for('set.study',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Study</button></a>
-            <button type="button" class="btn btn-danger" onclick="delete_set()")>Delete</button>
+            {% if view_only %}
+                <a href="{{url_for('set.study',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Study</button></a>
+            {% else %}
+                <a href="{{url_for('set.edit',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Edit</button></a>
+                <a href="{{url_for('set.study',set_id=set.id_num)}}"><button type="button" class="btn btn-primary">Study</button></a>
+                <button type="button" class="btn btn-danger" onclick="delete_set('{{ view_only }}')")>Delete</button>
+            {% endif %}
         </div>
     </div>
-
+    <div>
+       <h5 class="float-left">{{ set.description }}</h5>
+       <h6 class="float-right">Creator: {{ set.username }}</h6>
+    </div>
     <table class="table">
         <thead>
             <tr>

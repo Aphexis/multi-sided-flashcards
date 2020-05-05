@@ -1,11 +1,14 @@
 class Set:
-    def __init__ (self, id_num, name, description, sides, cards):
+    def __init__ (self, id_num, name, description, sides, cards, user, public, username):
         # add side_names and card_info as properties?
         self.id_num = id_num
         self.name = name
         self.description = description
         self.sides = sides  # array of Side dictionaries
         self.cards = cards  # array of Card objects
+        self.user = user  # user who can edit the set
+        self.public = public  # if True, any user can view these sets
+        self.username = username
     
     def num_cards(self):
         return len(self.cards)
@@ -28,9 +31,6 @@ class Set:
             cards_info.append(card_info)
         return cards_info  # 2D array of card info
 
-    def reorder(self): # do we need this?
-        # reorders the cards based on card order?
-        return
 
 #Side: dictionary of {id_num: [order, name, set_id]}
 
