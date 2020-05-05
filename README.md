@@ -19,9 +19,10 @@ The backend is built using Flask and Python, connected to a MySQL database using
 - [x] View a set
 - [x] Create a set
 - [ ] Edit a set
-- [ ] Study from a set
+- [x] Study from a set
+- [x] Users and user login
 
 #### Future Goals
-- [ ] Users and user login
+- [ ] User settings, confirmation emails
 - [ ] Reordering sides/cards when viewing
 - [ ] "Smart" studying based on correct/incorrect ratio, number of times viewed, etc.
