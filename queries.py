@@ -77,7 +77,7 @@ def build_sets_private(user):
 def get_set(set_id):  # builds a Set object for a given set_id
     record = db.session.query(Set_SQL).filter_by(set_id=set_id).one()
     user = db.session.query(User).filter_by(id=record.user_id).one()
-    set = Set(record.set_id, record.name, record.description, query_sides(record.set_id), query_cards(record.set_id), record.user_id, record.public, user.name)
+    set = Set(record.set_id, record.name, record.description, query_sides(record.set_id), query_cards(record.set_id), record.user_id, record.public)
     return set
 
 
