@@ -3,16 +3,18 @@ set_blueprint = Blueprint('set', __name__, template_folder='templates')
 from sqlalchemy.orm import sessionmaker
 from queries import get_set, delete_set, edit_form
 from flask_login import current_user, login_required
+from models import User
 
 @set_blueprint.route('/<int:set_id>') 
 def set(set_id):
     set = get_set(set_id)
     if current_user.is_authenticated and set.user == current_user.id:
         set_info = set.get_card_info()
-        return render_template('set.html', set=set, set_info=set_info, view_only=False)
+        return render_template('set.html', set=set, set_info=set_info, view_only=False, user=user)
     elif set.public:
+        user = User.query.filter_by(id=set.user).one()
         set_info = set.get_card_info()
-        return render_template('set.html', set=set, set_info=set_info, view_only=True)
+        return render_template('set.html', set=set, set_info=set_info, view_only=True, user=user)
     else:
         flash("You are not authorized to view this set!", "error")
         return redirect(url_for('home.home'))
