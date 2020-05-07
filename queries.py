@@ -42,8 +42,8 @@ def query_sets(records):  # returns an array of all sets in [set_id, name, descr
     # records = db.session.query(Set_SQL).all()
     sets = []
     for record in records:
-        user = db.session.query(User).filter_by(id=record.user_id).one()
-        set = [record.set_id, record.name, record.description, record.user_id, record.public, user.name]
+        # user = db.session.query(User).filter_by(id=record.user_id).one()
+        set = [record.set_id, record.name, record.description, record.user_id, record.public]
         sets.append(set)
     return sets
 
@@ -64,7 +64,7 @@ def build_sets(records):  # builds an array of Set objects for all sets in db us
     # records = query_sets()
     sets = []
     for record in records:
-        set = Set(record[0], record[1], record[2], query_sides(record[0]), query_cards(record[0]), record[3], record[4], record[5])
+        set = Set(record[0], record[1], record[2], query_sides(record[0]), query_cards(record[0]), record[3], record[4])
         sets.append(set)
     return sets
 
@@ -145,6 +145,66 @@ def process_form(form, user):
         cell = {'card_id': card_index+card_id, 'side_id': side_id+side_index, 'info': form[field]}
         cells.append(cell)
     cells_result = db.engine.execute(Cell_SQL.__table__.insert(), cells)
+
+def edit_form(form, set_id):
+    # update set info
+    record = db.session.query(Set_SQL).filter_by(set_id=set_id).one()
+    public = True if form.getlist('public') else False
+    record.name = form['name']
+    record.description = form['description']
+    record.public = public
+    db.session.commit()
+    set_id = record.set_id
+    # print(set_id)
+
+    # update sides
+    sides = db.session.query(Side_SQL).filter_by(set_id=set_id).all()
+    side_fields = dict(filter(lambda elem: 'cell[0]' in elem[0], form.items()))
+    for i in range(len(sides)): # update existing sides
+        side = sides[i]
+        side.name = form['cell[0][' + str(i) + ']']
+    db.session.commit()
+
+    new_sides = []
+    if len(side_fields) > len(sides): # new sides
+        for i in range(len(sides), len(side_fields)):
+            side = {'set_id': set_id, 'name': form['cell[0][' + str(i) + ']']}
+            new_sides.append(side)
+        db.engine.execute(Side_SQL.__table__.insert(), new_sides)
+
+    old_sides = len(sides)
+
+    # update cards
+    cards = db.session.query(Card_SQL).filter_by(set_id=set_id).all()
+    card_fields = dict(filter(lambda elem: 'cell' in elem[0] and '][0]' in elem[0] and 'cell[0]' not in elem[0], form.items()))
+    # existing cards don't need to be updated
+
+    new_cards = []
+    if len(card_fields) > len(cards): # new cards
+        for i in range(len(cards), len(card_fields)):
+            card = {'set_id': set_id}
+            new_cards.append(card)
+        print(new_cards)
+        db.engine.execute(Card_SQL.__table__.insert(), new_cards)
+    old_cards = len(cards)
+
+    # update cells
+    cards = db.session.query(Card_SQL).filter_by(set_id=set_id).all()
+    sides = db.session.query(Side_SQL).filter_by(set_id=set_id).all()
+    card_index = cards[0].card_ID
+    side_index = sides[0].side_id
+    cells = []
+    for i in range(len(cards)):
+        for j in range(len(sides)):
+            if i < old_cards and j < old_sides: # update existing cell
+                cell = db.session.query(Cell_SQL).filter_by(card_id=cards[i].card_ID, side_id=sides[j].side_id).one()
+                cell.info = form['cell[' + str(i+1) + '][' + str(j) + ']']
+                db.session.commit()
+            else:
+                cell = {'card_id': cards[i].card_ID, 'side_id': sides[j].side_id, 'info': form['cell[' + str(i+1) + '][' + str(j) + ']']}
+                cells.append(cell)
+    if cells:
+        db.engine.execute(Cell_SQL.__table__.insert(), cells)
 
 ### DELETE
 def delete_set(set_id):

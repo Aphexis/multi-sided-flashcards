@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Multi-sided Flashcards</title>
+    <title>Flexcards</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static',filename='favicon/favicon.ico') }}"/>
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename=' favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon/favicon-32x32.png') }}">
@@ -41,12 +41,13 @@
 {#                <button type="button" class="btn btn-primary">Create</button>#}
 {#                <a class="nav-item nav-link" href="#">Other Options?</a>#}
                 {% if current_user.is_authenticated %}
-                    <span class="dropdown show">
+                    <span class="dropdown show dropleft">
                       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ current_user.name }}
                       </a>
 
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item" href="{{ url_for('home.profile', user_id=current_user.id, username=current_user.name) }}">My Profile</a>
                         <a class="dropdown-item" href="/logout">Log out</a>
                       </div>
                     </span>

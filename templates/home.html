@@ -11,14 +11,18 @@
         <div class="card-deck">
             {% for set in private_sets %}
                 <div class="col-md-4 mt-3">
-                    <div class="card d">
-                        <div class="card-body shadow-sm">
+                    <div class="card d shadow-sm">
+                        <div class="card-body">
                             <h4 class="card-title">{{ set.name }}</h4>
                             <hr>
                             <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>
                             <p class="card-text">{{ set.description }}</p>
                             <a href= "{{url_for('set.set', set_id=set.id_num)}}" class="invisible_link stretched-link"></a>
                         </div>
+                        <a href="{{ url_for('home.profile', user_id=set.user, username=users[set.user].name) }}" class="invisible_link" style="z-index: 5000; position: relative">
+                        <div class="card-footer text-muted">
+                            <img src="{{ users[set.user].avatar }}" style="width:10%"><h6 class="ml-2" style="display: inline-block">{{ users[set.user].name }}</h6>
+                        </div></a>
                     </div>
                 </div>
             {% endfor %}
@@ -37,8 +41,12 @@
 {#                            <h6 class="card-subtitle mb-2 text-muted float-right">{{ set.username }}</h6>#}
                             <p class="card-text">{{ set.description }}</p>
                             <a href= "{{url_for('set.set', set_id=set.id_num)}}" class="invisible_link stretched-link"></a>
-                            <h6 class="card-text text-right"><small>Creator: {{ set.username }}</small></h6>
+{#                            <h6 class="card-text text-right"><small>Creator: {{ set.username }}</small></h6>#}
                         </div>
+                        <a href="{{ url_for('home.profile', user_id=set.user, username=users[set.user].name) }}" class="invisible_link" style="z-index: 5000; position: relative">
+                        <div class="card-footer text-muted">
+                            <img src="{{ users[set.user].avatar }}" style="width:10%"><h6 class="ml-2" style="display: inline-block">{{ users[set.user].name }}</h6>
+                        </div></a>
                     </div>
                 </div>
             {% endfor %}

@@ -47,14 +47,14 @@ function addCol(tableID) {
         if (i==0) { // set the remove button
             let button = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             let path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-            newCell.setAttribute('class', 'onHover')
+            newCell.setAttribute('class', 'onHover');
             button.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
             button.setAttribute('class', 'bi bi-dash-circle-fill hidden');
             button.setAttribute('width', '1.3em');
             button.setAttribute('height', '1.3em');
             button.setAttribute('viewBox', '0 0 16 16');
             button.setAttribute('fill', 'lightsteelblue');
-            button.setAttribute('id', 'removeRow[' + rows-1 + ']');
+            button.setAttribute('id', 'removeCol[' + rows-1 + ']');
             button.addEventListener("click", function() {removeCol(tableID, cols-2)});
             path.setAttribute("fill-rule", "evenodd");
             path.setAttribute("d",'M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z');
@@ -68,11 +68,11 @@ function addCol(tableID) {
             cellInput.setAttribute('name', cellName);
             if (i == 1) {
                 cellInput.setAttribute('placeholder', 'Side ' + Number(cols - 1) + ' Name')
-                cellInput.setAttribute('maxlength', '255')
-                cellInput.setAttribute('required', '')
+                cellInput.setAttribute('maxlength', '255');
+                cellInput.setAttribute('required', '');
             } else {
                 cellInput.setAttribute('placeholder', cellName);
-                cellInput.setAttribute('maxlength', '1000')
+                cellInput.setAttribute('maxlength', '1000');
             }
             newCell.appendChild(cellInput);
         }
@@ -89,7 +89,7 @@ function renumber(rows, numRows, numCols) {
         var currRow = rows[i];
         // console.log("editing a row");
         console.log(currRow);
-        for (var j=1; j<numCols-1; j++) {
+        for (var j=1; j<numCols-2; j++) {
             console.log("on col " + j);
             let cellName = 'cell[' + Number(i-1) + '][' + Number(j - 1) + ']';
             console.log(cellName);

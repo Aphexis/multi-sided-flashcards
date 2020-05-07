@@ -81,6 +81,12 @@ class User(UserMixin, db.Model):
                            index=False,
                            unique=False,
                            nullable=True)
+    avatar = db.Column(db.String(200),
+                           unique=False,
+                           nullable=True)
+    bio = db.Column(db.String(500),
+                           unique=False,
+                           nullable=True)
 
     def set_password(self, password):
         """Create hashed password."""

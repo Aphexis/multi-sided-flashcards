@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request
 set_blueprint = Blueprint('set', __name__, template_folder='templates')
 from sqlalchemy.orm import sessionmaker
-from queries import get_set, delete_set
+from queries import get_set, delete_set, edit_form
 from flask_login import current_user, login_required
 
 @set_blueprint.route('/<int:set_id>') 
@@ -17,9 +17,12 @@ def set(set_id):
         flash("You are not authorized to view this set!", "error")
         return redirect(url_for('home.home'))
 
-@set_blueprint.route('/<int:set_id>/edit')
+@set_blueprint.route('/<int:set_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit(set_id):
+    if request.method == 'POST':
+        edit_form(request.form, set_id)
+        return redirect(url_for('set.set', set_id=set_id))
     set = get_set(set_id)
     if current_user.is_authenticated and set.user == current_user.id:
         return render_template('set-edit.html', set=set)

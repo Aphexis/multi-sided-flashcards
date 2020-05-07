@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user
 from forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from app import db
+import random
 auth_blueprint = Blueprint('auth', __name__, template_folder='templates')
 
 # @auth_blueprint.route('/')
@@ -35,11 +36,15 @@ def logout():
 
 @auth_blueprint.route('/signup', methods=['GET', 'POST'])
 def signup():
+    avatars = {0: 'avatar lightblue', 1: 'avatar lightgreen', 2: 'avatar lightviolet', 3: 'avatar orange',
+               4: 'avatar pink', 5: 'avatar purple', 6: 'avatar red', 7: 'avatar yellow'}
     if current_user.is_authenticated:
         return redirect(url_for('auth.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(name=form.username.data, email=form.email.data)
+        avatar = avatars[random.randint(0, 7)]
+        avatar_url = url_for('static', filename='avatars/' + avatar + '.png')
+        user = User(name=form.username.data, email=form.email.data, avatar=avatar_url)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
