@@ -10,7 +10,7 @@ def set(set_id):
     set = get_set(set_id)
     if current_user.is_authenticated and set.user == current_user.id:
         set_info = set.get_card_info()
-        return render_template('set.html', set=set, set_info=set_info, view_only=False, user=user)
+        return render_template('set.html', set=set, set_info=set_info, view_only=False, user=current_user)
     elif set.public:
         user = User.query.filter_by(id=set.user).one()
         set_info = set.get_card_info()
