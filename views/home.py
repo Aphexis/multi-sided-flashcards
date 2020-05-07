@@ -30,7 +30,6 @@ def create_set():
     return render_template('create.html')
 
 @home_blueprint.route('/<int:user_id>/<string:username>')
-@login_required
 def profile(user_id, username):
     user = User.query.filter_by(id=user_id).one()
     sets = build_sets_private(user)
