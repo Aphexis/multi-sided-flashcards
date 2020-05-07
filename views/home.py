@@ -14,7 +14,8 @@ def home():
     public_sets = build_sets_public(current_user)
     private_sets = build_sets_private(current_user) if current_user.is_authenticated else None
     users = {}
-    users[current_user.id] = current_user
+    if current_user.is_authenticated:
+        users[current_user.id] = current_user
     for set in public_sets:
         if set.user not in users:
             users[set.user] = db.session.query(User).filter_by(id=set.user).one()
