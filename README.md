@@ -3,18 +3,19 @@ Web app designed to allow for the creation of flashcards with a flexible number 
 
 The backend is built using Flask and Python, connected to a Postgres database using SQLAlchemy. The frontend is built using HTML, CSS, JavaScript (with jQuery), and Bootstrap. 
 
-## To-do
+## Functionality
 #### Main Features
 - [x] View all sets
 - [x] View a set
 - [x] Create a set
 - [x] Edit a set
 - [x] Study from a set
-- [x] Users and user login
-- [ ] User settings, confirmation emails
-- [ ] Welcome page
+- [x] Users & user login
+- [X] User profiles & user settings
 
 #### Future Goals
+- [ ] Welcome page
 - [ ] "Smart" studying based on correct/incorrect ratio, number of times viewed, etc.
 - [ ] More user analytics (most recently studied, etc.)
 - [ ] Search sets functionality
+- [ ] Account confirmation emails, password reset emails
