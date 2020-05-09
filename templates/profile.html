@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+{% endblock %}
+
+{% block body %}
+    {% from 'set-card.html' import card %}
+    <br>
+    <div class="row">
+        <div class="col-2">
+            <img src="{{ url_for('static', filename=user.avatar) }}" style="width:100%">
+        </div>
+        <div class="col-9 my-auto">
+            <h1>{{ user.name }} (#{{ user.id }})</h1>
+            {% if user.bio %}
+                <h6><i>{{ user.bio }}</i></h6>
+            {% endif %}
+        </div>
+    {% if your_profile %}
+        <div class="col-1">
+            <a href="{{ url_for('auth.settings') }}"><button type="button" class="btn btn-secondary">Edit</button></a>
+        </div>
+    {% endif %}
+    </div>
+    <br>
+    <div class="title-text"><h3>Created Sets</h3></div>
+        <div class="card-deck mb-3">
+            {% for set in sets %}
+                {{ card(set, user) }}
+            {% endfor %}
+        </div>
+{% endblock %}
+
+{% block modalTitle %}User Profiles{% endblock %}
+{% block modalContent %}
+    <p>On a user's profile, you can view their avatar, bio, and sets!</p>
+    <p>If this is your own set, you can also click the button on the right side to edit your profile information.</p>
+{% endblock %}

@@ -6,24 +6,40 @@
 {% endblock %}
 
 {% block body %}
-    <div class="title-text"><h1>Your Sets</h1></div>
-        {% import 'set_cards.html' as cards %}
-    <div class="card-deck">
-        {% for set in sets %}
-            <div class="col-md-4 mt-3">
-                <!-- <p>{{set.name}}</p>
-                <p>{{set.num_cards()}} cards</p>
-                <p>{{set.num_sides()}} sides</p> -->
-                <div class="card d">
-                    <div class="card-body shadow-sm">
-                        <h4 class="card-title">{{ set.name }}</h4>
-                        <hr>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>                
-                        <p class="card-text">{{ set.description }}</p>
-                        <a href= "set/{{ set.id_num }}" class="invisible_link stretched-link"></a>
-                    </div>
-                </div>
+    {% from 'set-card.html' import card %}
+    {% if current_user.is_authenticated %}
+        <div class="title-text"><h1>My Sets</h1></div>
+        {% if private_sets %}
+            <div class="card-deck">
+                {% set length = 3 if private_sets|length>3 else private_sets|length %}
+                {% for i in range(length) %}
+                    {{ card(private_sets[i], current_user) }}
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+            {% if private_sets|length>3 %}
+                <a href="{{ url_for('home.my_sets') }}"><p class="text-right mr-3 mt-1">see all</p></a>
+            {% endif %}
+        {% else %}
+            <p class="ml-4">No sets yet! <a href="{{ url_for('home.create_set') }}">Create one?</a></p>
+        {% endif %}
+    {% endif %}
+    <br>
+    <div class="title-text"><h1>Public Sets</h1></div>
+    {% set length = 6 if public_sets|length>6 else public_sets|length %}
+        <div class="card-deck">
+            {% for i in range(length) %}
+                {{ card(public_sets[i], users[public_sets[i].user]) }}
+            {% endfor %}
+        </div>
+    {% if public_sets|length>6 %}
+        <a href="{{ url_for('home.public_sets') }}"><p class="text-right mr-3 mt-1">see all</p></a>
+    {% endif %}
+{% endblock %}
+
+{% block modalTitle %}Home{% endblock %}
+{% block modalContent %}
+    <p>Welcome to the Flexcards homepage! 🗃</p>
+    <p>Here, you can view the most recently created sets.</p>
+    <p>Try clicking a set to view it, or click the creator of a set to view their profile!
+        If you're logged in, you can also use the options in the navbar above to create a set or view more sets.</p>
 {% endblock %}

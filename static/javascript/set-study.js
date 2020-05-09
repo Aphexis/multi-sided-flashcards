@@ -33,7 +33,7 @@ function loadDone(set_id, total_cards) {
             if ( status == "error" ) {
                 console.log("Error occured");
                 var msg = "Sorry but there was an error: ";
-                $( ".middle-col" ).html( msg + xhr.status + " " + xhr.statusText );
+                $( "#body" ).html( msg + xhr.status + " " + xhr.statusText );
             }
         });
     $(".progress-bar")

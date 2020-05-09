@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h1>Log In</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <div>New User? <a href="{{ url_for('auth.signup') }}">Click to sign up!</a></div>
+{% endblock %}
+
+{% block modalTitle %}Login{% endblock %}
+{% block modalContent %}
+    <p>Please log in to view and edit your sets and create new ones!</p>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/create.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/create.js') }}"></script>
+{#    <script type="text/javascript" src="{{ url_for('static', filename='javascript/set-edit.js') }}"></script>#}
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="float-right">
+    <button type="button" class="btn btn-secondary" onclick="exit_edit()">Exit</button>
+    </div>
+    <h1>Edit Set</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Set Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ set.name }}" maxlength="255" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Set Description</label>
+            <input type="description" class="form-control" id="description" name="description"
+                   placeholder="Description" maxlength="500" value="{{ set.description }}" required>
+        </div>
+        <div class="form-group text-right">
+{#            <label for="public">Publicly viewable?</label>#}
+            <input type="checkbox" class="form-control" id="public" name="public" data-toggle="toggle" data-on="Public" data-off="Private" data-onstyle="secondary" data-offstyle="light"
+            {% if set.public %} checked {% endif %}>
+        </div>
+        <div class="form-group">
+            <label for="cell[0][0]">Card Information</label>
+            <table id="setTable">
+                <tbody id="tbody">
+                <tr>
+                    <th class="tg-0lax"></th>
+                    {% for i in range(set.num_sides()) %}
+                        <th class="onHover">
+                            <svg class="bi bi-dash-circle-fill hidden" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                                id="removeCol[{{ i - 1 }}]" onclick="removeCol('setTable', {{ i }})">
+                              <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z" clip-rule="evenodd"/>
+                            </svg>
+                        </th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th class="tg-0lax"></th>
+                    {% for i in range(set.num_sides()) %}
+                        <th class="tg-0lax"><input class="form-control" name="cell[0][{{ i }}]" placeholder="Side {{ i + 1 }} Name"
+                                                   maxlength="255" value="{{ set.get_side_names()[i + 1]}}"required></th>
+                    {% endfor %}
+                    <th class="tg-0lax">
+                        <svg class="bi bi-plus-circle-fill" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                             id="insertCol" onclick="addCol('setTable')">
+                          <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM8.5 4a.5.5 0 00-1 0v3.5H4a.5.5 0 000 1h3.5V12a.5.5 0 001 0V8.5H12a.5.5 0 000-1H8.5V4z" clip-rule="evenodd"/>
+                        </svg>
+                    </th>
+                </tr>
+                {% for i in range(set.num_cards()) %}
+                <tr>
+                    <td class="onHover">
+                        <svg class="bi bi-dash-circle-fill hidden" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                            id="removeRow[1]" onclick="removeRow('setTable', {{ i }})">
+                          <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM4 7.5a.5.5 0 000 1h8a.5.5 0 000-1H4z" clip-rule="evenodd"/>
+                        </svg>
+                    </td>
+                    {% set cards = set.get_card_info() %}
+                    {% for j in range(set.num_sides()) %}
+                        <td class="tg-0lax"><input class="form-control" name="cell[{{ i + 1 }}][{{ j }}]" maxlength="1000" value="{{ cards[i][j + 1] }}"></td>
+{#                        <td class="tg-0lax"><input class="form-control" name="cell[1][1]" maxlength="1000"></td>#}
+                    {% endfor %}
+                    <td class="tg-0lax"></td>
+                </tr>
+                {% endfor %}
+                <tr><td>
+                    <svg class="bi bi-plus-circle-fill" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="lightsteelblue" xmlns="http://www.w3.org/2000/svg"
+                         id="insertRow" onclick="addRow('setTable')">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM8.5 4a.5.5 0 00-1 0v3.5H4a.5.5 0 000 1h3.5V12a.5.5 0 001 0V8.5H12a.5.5 0 000-1H8.5V4z" clip-rule="evenodd"/>
+                    </svg>
+                </td></tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
+
+{% block modalTitle %}Edit Set{% endblock %}
+{% block modalContent %}
+    <p>In this view, you can edit the name, description, and contents of a set.</p>
+    <p>Make sure to click submit to save your edits!</p>
+{% endblock %}

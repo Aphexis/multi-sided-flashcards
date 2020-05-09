@@ -3,6 +3,8 @@
     {{ super() }}
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/create.css') }}">
     <script type="text/javascript" src="../static/javascript/create.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 {% endblock %}
 {% block body %}
     <h1>Create a set</h1>
@@ -15,6 +17,10 @@
             <label for="description">Set Description</label>
             <input type="description" class="form-control" id="description" name="description"
                    placeholder="Description" maxlength="500" required>
+        </div>
+        <div class="form-group text-right">
+{#            <label for="public">Publicly viewable?</label>#}
+            <input type="checkbox" class="form-control" id="public" name="public" checked data-toggle="toggle" data-on="Public" data-off="Private" data-onstyle="secondary" data-offstyle="light">
         </div>
         <div class="form-group">
             <label for="cell[0][0]">Card Information</label>
@@ -70,6 +76,12 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+{% endblock %}
 
-
+{% block modalTitle %}Create a Set{% endblock %}
+{% block modalContent %}
+    <p>Welcome to set creation! 🎉</p>
+    <p>Public sets are viewable by anyone, while private sets can only be seen by you.
+        Regardless of whether a set is public or private, only you can edit and delete it.</p>
+    <p>You can play around with adding or removing sides and cards - these are flexible flashcards!</p>
 {% endblock %}
