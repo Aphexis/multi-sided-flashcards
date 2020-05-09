@@ -17,3 +17,8 @@
     </form>
     <div>New User? <a href="{{ url_for('auth.signup') }}">Click to sign up!</a></div>
 {% endblock %}
+
+{% block modalTitle %}Login{% endblock %}
+{% block modalContent %}
+    <p>Please log in to view and edit your sets and create new ones!</p>
+{% endblock %}

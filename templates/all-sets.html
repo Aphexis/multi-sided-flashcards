@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{super()}}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}">
+{% endblock %}
+
+{% set title = "Public Sets" if public else "My Sets" %}
+{% block body %}
+    {% from 'set-card.html' import card %}
+    <div class="title-text"><h1>{{ title }}</h1></div>
+        <div class="card-deck">
+            {% for set in sets %}
+                {{ card(set, users[set.user]) }}
+            {% endfor %}
+        </div>
+{% endblock %}
+
+{% block modalTitle %}{{ title }}{% endblock %}
+{% block modalContent %}
+    {% if public %}
+        <p>At the Public Sets page, you can view all public sets created.</p>
+    {% else %}
+        <p>At the My Sets page, you can view all the sets you have created.</p>
+    {% endif %}
+    <p>Try clicking a set to view it, or click the creator of a set to view their profile!</p>
+{% endblock %}

@@ -36,3 +36,8 @@
     </form>
     <div>Already a user? <a href="{{ url_for('auth.login') }}">Click to log in!</a></div>
 {% endblock %}
+
+{% block modalTitle %}Sign up{% endblock %}
+{% block modalContent %}
+    <p>By signing up, you'll be able to create and edit your very own multi-sided flashcards!</p>
+{% endblock %}

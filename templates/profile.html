@@ -4,39 +4,35 @@
 {% endblock %}
 
 {% block body %}
+    {% from 'set-card.html' import card %}
     <br>
     <div class="row">
         <div class="col-2">
-            <img src="{{ user.avatar }}" style="width:100%">
+            <img src="{{ url_for('static', filename=user.avatar) }}" style="width:100%">
         </div>
-        <div class="col my-auto">
-            <h1>{{ user.name }}</h1>
+        <div class="col-9 my-auto">
+            <h1>{{ user.name }} (#{{ user.id }})</h1>
             {% if user.bio %}
                 <h6><i>{{ user.bio }}</i></h6>
             {% endif %}
         </div>
+    {% if your_profile %}
+        <div class="col-1">
+            <a href="{{ url_for('auth.settings') }}"><button type="button" class="btn btn-secondary">Edit</button></a>
+        </div>
+    {% endif %}
     </div>
     <br>
     <div class="title-text"><h3>Created Sets</h3></div>
         <div class="card-deck mb-3">
             {% for set in sets %}
-                <div class="col-md-4 mt-3">
-                    <div class="card d shadow-sm">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ set.name }}</h4>
-                            <hr>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>
-{#                            <h6 class="card-subtitle mb-2 text-muted float-right">{{ set.username }}</h6>#}
-                            <p class="card-text">{{ set.description }}</p>
-                            <a href= "{{url_for('set.set', set_id=set.id_num)}}" class="stretched-link"></a>
-{#                            <h6 class="card-text text-right"><small>Creator: {{ set.username }}</small></h6>#}
-                        </div>
-                        <a href="{{ url_for('home.profile', user_id=user.id, username=user.name) }}" class="invisible_link" style="z-index: 5000; position: relative">
-                        <div class="card-footer text-muted">
-                            <img src="{{ user.avatar }}" style="width:10%"><h6 class="ml-2" style="display: inline-block">{{ user.name }}</h6>
-                        </div></a>
-                    </div>
-                </div>
+                {{ card(set, user) }}
             {% endfor %}
         </div>
+{% endblock %}
+
+{% block modalTitle %}User Profiles{% endblock %}
+{% block modalContent %}
+    <p>On a user's profile, you can view their avatar, bio, and sets!</p>
+    <p>If this is your own set, you can also click the button on the right side to edit your profile information.</p>
 {% endblock %}

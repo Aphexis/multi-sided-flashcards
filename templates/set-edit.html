@@ -3,18 +3,16 @@
     {{ super() }}
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/create.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='javascript/create.js') }}"></script>
+{#    <script type="text/javascript" src="{{ url_for('static', filename='javascript/set-edit.js') }}"></script>#}
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 {% endblock %}
 
 {% block body %}
-    <div class="col-1">
-{#    this button should come with an alert warning and be inline with text#}
-    <a href="{{url_for('set.set',set_id=set.id_num)}}"><button type="button" class="btn btn-secondary">Exit</button></a>
+    <div class="float-right">
+    <button type="button" class="btn btn-secondary" onclick="exit_edit()">Exit</button>
     </div>
-    <div class="col">
     <h1>Edit Set</h1>
-    </div>
     <form method="POST">
         <div class="form-group">
             <label for="name">Set Name</label>
@@ -85,4 +83,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+{% endblock %}
+
+{% block modalTitle %}Edit Set{% endblock %}
+{% block modalContent %}
+    <p>In this view, you can edit the name, description, and contents of a set.</p>
+    <p>Make sure to click submit to save your edits!</p>
 {% endblock %}

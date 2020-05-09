@@ -33,21 +33,31 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 {#<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a> #}
                 {% if current_user.is_authenticated %}
-                <li class="nav item">
-                    <a class="nav-item nav-link" href="{{ url_for('home.create_set') }}">Create</a>
-                </li>
+                    <li class="nav item">
+                        <a class="nav-item nav-link" href="{{ url_for('home.create_set') }}">Create</a>
+                    </li>
+                    <li class="nav item">
+                        <a class="nav-item nav-link" href="{{ url_for('home.my_sets') }}">My Sets</a>
+                    </li>
                 {% endif %}
+                <li class="nav item">
+                    <a class="nav-item nav-link" href="{{ url_for('home.public_sets') }}">Public Sets</a>
+                </li>
             </ul>
-{#                <button type="button" class="btn btn-primary">Create</button>#}
-{#                <a class="nav-item nav-link" href="#">Other Options?</a>#}
+
+            <img src="https://image.flaticon.com/icons/svg/25/25231.svg" style="height:1.5em" onclick="window.open('https://github.com/Aphexis/multi-sided-flashcards/')" class="mr-3">
+            <svg class="bi bi-info-circle-fill mr-3" data-toggle="modal" data-target="#siteModal" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+            </svg>
                 {% if current_user.is_authenticated %}
                     <span class="dropdown show dropleft">
                       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ current_user.name }}
+                        {{ current_user.name }} (#{{ current_user.id }})
                       </a>
 
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                           <a class="dropdown-item" href="{{ url_for('home.profile', user_id=current_user.id, username=current_user.name) }}">My Profile</a>
+                          <a class="dropdown-item" href="{{ url_for('auth.settings') }}">Settings</a>
                         <a class="dropdown-item" href="/logout">Log out</a>
                       </div>
                     </span>
@@ -78,5 +88,33 @@
         {% block body %}
         {% endblock %}
     </div>
+{#    <footer class="footer">#}
+{#        <div class="container">#}
+{#            <h6 class="text-center text-muted">footer text</h6>#}
+{#        </div>#}
+{#    </footer>#}
+
 </body>
 </html>
+
+{#    Site Modal #}
+    <div class="modal fade" id="siteModal" tabindex="-1" role="dialog" aria-labelledby="siteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="siteModalLabel">
+                        Flexcards: {% block modalTitle %}{% endblock %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% block modalContent %}{% endblock %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

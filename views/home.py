@@ -11,15 +11,38 @@ def root():
 
 @home_blueprint.route('/home')
 def home():
-    public_sets = build_sets_public(current_user)
+    public_sets_all = build_sets_public(current_user)
+    public_sets = []
     private_sets = build_sets_private(current_user) if current_user.is_authenticated else None
     users = {}
     if current_user.is_authenticated:
         users[current_user.id] = current_user
+        for set in public_sets_all:
+            if set.user != current_user.id:
+                public_sets.append(set)
     for set in public_sets:
         if set.user not in users:
             users[set.user] = db.session.query(User).filter_by(id=set.user).one()
     return render_template('home.html', public_sets=public_sets, private_sets=private_sets, current_user=current_user, users=users)
+
+@home_blueprint.route('/mysets')
+@login_required
+def my_sets():
+    private_sets = build_sets_private(current_user)
+    users = {}
+    users[current_user.id] = current_user
+    return render_template('all-sets.html', sets=private_sets, users=users, public=False)
+
+@home_blueprint.route('/publicsets')
+def public_sets():
+    public_sets = build_sets_public(current_user)
+    # private_sets = build_sets_private(current_user) if current_user.is_authenticated else None
+    users = {}
+    for set in public_sets:
+        if set.user not in users:
+            users[set.user] = db.session.query(User).filter_by(id=set.user).one()
+    return render_template('all-sets.html', sets=public_sets, users=users, public=True)
+
 
 @home_blueprint.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -33,4 +56,5 @@ def create_set():
 def profile(user_id, username):
     user = User.query.filter_by(id=user_id).one()
     sets = build_sets_private(user)
-    return render_template('profile.html', user=user, sets=sets)
+    your_profile = True if current_user.is_authenticated and user_id == current_user.id else False
+    return render_template('profile.html', user=user, sets=sets, your_profile=your_profile)

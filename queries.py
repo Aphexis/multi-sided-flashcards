@@ -50,10 +50,6 @@ def query_sets(records):  # returns an array of all sets in [set_id, name, descr
 def query_sets_public(user):
     records = db.session.query(Set_SQL).filter_by(public=True).all()
     all_records = query_sets(records)
-    if user.is_authenticated:
-        for record in all_records:
-            if record[3] == user.id:
-                all_records.remove(record)
     return all_records
 
 def query_sets_private(user):

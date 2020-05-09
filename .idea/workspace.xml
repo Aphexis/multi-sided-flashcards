@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bae56bb-e290-4faa-9463-57b349ffc0d2" name="Default Changelist" comment="add Set class, home template">
-      <change beforePath="$PROJECT_DIR$/views/set.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/set.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/styles/settings.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/all-sets.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/queries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/javascript/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/javascript/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/set-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set-edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/set-study.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set-study.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/set.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/set_cards.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set-card.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sign-up.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign-up.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,10 +49,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -170,21 +190,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Flask (app.py) (1)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
-      <module name="Flashcards" />
-      <option name="target" value="$PROJECT_DIR$/app.py" />
-      <option name="targetType" value="PATH" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
     <configuration name="Flask (app.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
       <option name="flaskDebug" value="true" />
       <option name="flaskEnv" value="development, debug=1" />
@@ -197,7 +202,22 @@
         <env name="password" value="root!$23" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Flask (app.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
+      <module name="Flashcards" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -320,7 +340,6 @@
     </configuration>
     <list>
       <item itemvalue="Flask server.Flask (app.py)" />
-      <item itemvalue="Flask server.Flask (app.py) (1)" />
       <item itemvalue="Python.models" />
       <item itemvalue="Python.queries" />
       <item itemvalue="Python.run" />
@@ -328,7 +347,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Flask server.Flask (app.py)" />
-        <item itemvalue="Flask server.Flask (app.py) (1)" />
         <item itemvalue="Flask server.Flask (app.py)" />
         <item itemvalue="Python.queries" />
         <item itemvalue="Flask server.Flask (app.py)" />
@@ -386,7 +404,10 @@
       <workItem from="1588624405251" duration="12205000" />
       <workItem from="1588705987115" duration="9097000" />
       <workItem from="1588721125578" duration="5064000" />
-      <workItem from="1588781158943" duration="18560000" />
+      <workItem from="1588781158943" duration="19681000" />
+      <workItem from="1588884517408" duration="2057000" />
+      <workItem from="1588891108627" duration="616000" />
+      <workItem from="1588954471060" duration="28067000" />
     </task>
     <task id="LOCAL-00001" summary="add Set class, home template">
       <created>1565840524830</created>
@@ -429,22 +450,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="372" y="39" key="FileChooserDialogImpl/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1585402702776" />
-    <state width="1225" height="154" key="GridCell.Tab.0.bottom" timestamp="1588815901067">
+    <state width="1225" height="280" key="GridCell.Tab.0.bottom" timestamp="1588987371210">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.bottom/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588815901067" />
-    <state width="1225" height="154" key="GridCell.Tab.0.center" timestamp="1588815901066">
+    <state width="1225" height="280" key="GridCell.Tab.0.bottom/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588987371210" />
+    <state width="1225" height="280" key="GridCell.Tab.0.center" timestamp="1588987371210">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.center/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588815901066" />
-    <state width="1225" height="154" key="GridCell.Tab.0.left" timestamp="1588815901066">
+    <state width="1225" height="280" key="GridCell.Tab.0.center/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588987371210" />
+    <state width="1225" height="280" key="GridCell.Tab.0.left" timestamp="1588987371210">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.left/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588815901066" />
-    <state width="1225" height="154" key="GridCell.Tab.0.right" timestamp="1588815901067">
+    <state width="1225" height="280" key="GridCell.Tab.0.left/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588987371210" />
+    <state width="1225" height="280" key="GridCell.Tab.0.right" timestamp="1588987371210">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1225" height="154" key="GridCell.Tab.0.right/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588815901067" />
+    <state width="1225" height="280" key="GridCell.Tab.0.right/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588987371210" />
     <state width="1225" height="188" key="GridCell.Tab.1.bottom" timestamp="1588727973202">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -465,26 +486,30 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="448" y="0" key="RollbackChangesDialog/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588364015101" />
-    <state x="34" y="0" key="SettingsEditor" timestamp="1588782511167">
+    <state x="34" y="0" key="SettingsEditor" timestamp="1588963795559">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="34" y="0" key="SettingsEditor/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588782511167" />
+    <state x="34" y="0" key="SettingsEditor/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588963795559" />
     <state x="238" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588283196015">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="238" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588283196015" />
-    <state x="417" y="238" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587677977121">
+    <state x="417" y="238" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588969018567">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="417" y="238" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1587677977121" />
-    <state x="0" y="0" width="891" height="680" key="find.popup" timestamp="1588194665178">
+    <state x="417" y="238" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588969018567" />
+    <state x="0" y="0" width="898" height="680" key="find.popup" timestamp="1588993695792">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="0" y="0" width="891" height="680" key="find.popup/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588194665178" />
+    <state x="0" y="0" width="898" height="680" key="find.popup/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588993695792" />
+    <state x="219" y="-1" width="840" height="1034" key="search.everywhere.popup" timestamp="1588963875653">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="219" y="-1" width="840" height="1034" key="search.everywhere.popup/3840.-615.1920.960/0.0.1280.680@0.0.1280.680" timestamp="1588963875653" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Flashcards$spreadsheet.coverage" NAME="spreadsheet Coverage Results" MODIFIED="1577673934479" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Flashcards$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1588801591923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Flashcards$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1588954650633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Flashcards$Flask.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1578633285123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Flashcards$queries.coverage" NAME="queries Coverage Results" MODIFIED="1578882464014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Flashcards$run.coverage" NAME="run Coverage Results" MODIFIED="1577676585870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

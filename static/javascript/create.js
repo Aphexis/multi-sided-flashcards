@@ -31,7 +31,7 @@ function addRow(tableID) {
         let cellInput = document.createElement("input");
         cellInput.setAttribute('class', 'form-control');
         cellInput.setAttribute('name', cellName);
-        cellInput.setAttribute('placeholder', cellName);
+        // cellInput.setAttribute('placeholder', cellName);
         cellInput.setAttribute('maxlength', '1000')
         newCell.appendChild(cellInput);
     }
@@ -71,7 +71,7 @@ function addCol(tableID) {
                 cellInput.setAttribute('maxlength', '255');
                 cellInput.setAttribute('required', '');
             } else {
-                cellInput.setAttribute('placeholder', cellName);
+                // cellInput.setAttribute('placeholder', cellName);
                 cellInput.setAttribute('maxlength', '1000');
             }
             newCell.appendChild(cellInput);
@@ -97,7 +97,7 @@ function renumber(rows, numRows, numCols) {
             if (i == 1) {
                 currRow.cells[j].children[0].setAttribute('placeholder', 'Side ' + j + ' Name')
             } else {
-                currRow.cells[j].children[0].setAttribute('placeholder', cellName);
+                // currRow.cells[j].children[0].setAttribute('placeholder', cellName);
             }
         }
     }
@@ -134,5 +134,13 @@ function removeCol(tableID, col) {
         }
         console.log("doing renumbering for cols");
         renumber(rows, numRows, cols);
+    }
+}
+
+function exit_edit(){
+    if (window.confirm("You are exiting editing. This will discard all your changes! " +
+        "Are you sure you want to do this?")) {
+        let pathArray = window.location.pathname.slice(0, -5);
+        window.location.replace(pathArray);
     }
 }
