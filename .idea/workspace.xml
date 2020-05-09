@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0bae56bb-e290-4faa-9463-57b349ffc0d2" name="Default Changelist" comment="add Set class, home template">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -388,7 +388,7 @@
       <workItem from="1588781158943" duration="19681000" />
       <workItem from="1588884517408" duration="2057000" />
       <workItem from="1588891108627" duration="616000" />
-      <workItem from="1588954471060" duration="28349000" />
+      <workItem from="1588954471060" duration="28496000" />
     </task>
     <task id="LOCAL-00001" summary="add Set class, home template">
       <created>1565840524830</created>

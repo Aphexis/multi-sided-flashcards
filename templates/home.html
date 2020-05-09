@@ -16,7 +16,9 @@
                     {{ card(private_sets[i], current_user) }}
                 {% endfor %}
             </div>
-            <a href="{{ url_for('home.my_sets') }}"><p class="text-right mr-3 mt-1">see all</p></a>
+            {% if private_sets|length>3 %}
+                <a href="{{ url_for('home.my_sets') }}"><p class="text-right mr-3 mt-1">see all</p></a>
+            {% endif %}
         {% else %}
             <p class="ml-4">No sets yet! <a href="{{ url_for('home.create_set') }}">Create one?</a></p>
         {% endif %}
@@ -29,7 +31,9 @@
                 {{ card(public_sets[i], users[public_sets[i].user]) }}
             {% endfor %}
         </div>
-    <a href="{{ url_for('home.public_sets') }}"><p class="text-right mr-3 mt-1">see all</p></a>
+    {% if public_sets|length>6 %}
+        <a href="{{ url_for('home.public_sets') }}"><p class="text-right mr-3 mt-1">see all</p></a>
+    {% endif %}
 {% endblock %}
 
 {% block modalTitle %}Home{% endblock %}
