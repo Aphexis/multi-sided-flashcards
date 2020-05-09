@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bae56bb-e290-4faa-9463-57b349ffc0d2" name="Default Changelist" comment="add Set class, home template">
-      <change afterPath="$PROJECT_DIR$/static/styles/settings.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/all-sets.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/settings.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/queries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/javascript/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/javascript/create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/set-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/set-study.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set-study.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/set.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/set_cards.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/set-card.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign-up.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign-up.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -407,7 +388,7 @@
       <workItem from="1588781158943" duration="19681000" />
       <workItem from="1588884517408" duration="2057000" />
       <workItem from="1588891108627" duration="616000" />
-      <workItem from="1588954471060" duration="28067000" />
+      <workItem from="1588954471060" duration="28349000" />
     </task>
     <task id="LOCAL-00001" summary="add Set class, home template">
       <created>1565840524830</created>

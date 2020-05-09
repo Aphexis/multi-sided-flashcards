@@ -20,6 +20,8 @@ def home():
         for set in public_sets_all:
             if set.user != current_user.id:
                 public_sets.append(set)
+    else:
+        public_sets = public_sets_all
     for set in public_sets:
         if set.user not in users:
             users[set.user] = db.session.query(User).filter_by(id=set.user).one()
