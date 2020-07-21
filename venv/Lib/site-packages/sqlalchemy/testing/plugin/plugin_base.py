@@ -358,7 +358,7 @@ def _engine_uri(options, file_config):
     config._current = None
     for db_url in db_urls:
 
-        if options.write_idents and provision.FOLLOWER_IDENT:  # != 'master':
+        if options.write_idents and provision.FOLLOWER_IDENT:  # != 'main':
             with open(options.write_idents, "a") as file_:
                 file_.write(provision.FOLLOWER_IDENT + " " + db_url + "\n")
 

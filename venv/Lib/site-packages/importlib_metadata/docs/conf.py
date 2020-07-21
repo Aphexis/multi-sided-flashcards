@@ -49,8 +49,8 @@ templates_path = ['_templates']
 # source_suffix = ['.rst', '.md']
 source_suffix = '.rst'
 
-# The master toctree document.
-master_doc = 'index'
+# The main toctree document.
+main_doc = 'index'
 
 # General information about the project.
 project = 'importlib_metadata'
@@ -135,7 +135,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'importlib_metadata.tex',
+    (main_doc, 'importlib_metadata.tex',
      'importlib\\_metadata Documentation',
      'Brett Cannon, Barry Warsaw', 'manual'),
     ]
@@ -146,7 +146,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'importlib_metadata', 'importlib_metadata Documentation',
+    (main_doc, 'importlib_metadata', 'importlib_metadata Documentation',
      [author], 1)
     ]
 
@@ -157,7 +157,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'importlib_metadata', 'importlib_metadata Documentation',
+    (main_doc, 'importlib_metadata', 'importlib_metadata Documentation',
      author, 'importlib_metadata', 'One line description of project.',
      'Miscellaneous'),
     ]
