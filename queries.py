@@ -156,10 +156,18 @@ def edit_form(form, set_id):
     # update sides
     sides = db.session.query(Side_SQL).filter_by(set_id=set_id).all()
     side_fields = dict(filter(lambda elem: 'cell[0]' in elem[0], form.items()))
-    for i in range(len(sides)): # update existing sides
+    num_sides = min(len(sides), len(side_fields))
+    for i in range(num_sides): # update existing sides
         side = sides[i]
         side.name = form['cell[0][' + str(i) + ']']
     db.session.commit()
+
+    if len(side_fields) < len(sides): # delete removed sides
+        for i in range(len(side_fields), len(sides)):
+            db.session.query(Cell_SQL).filter_by(side_id=sides[i].side_id).delete()
+            db.session.query(Side_SQL).filter_by(side_id=sides[i].side_id).delete()
+            # sides[i].delete()
+        db.session.commit()
 
     new_sides = []
     if len(side_fields) > len(sides): # new sides
@@ -168,11 +176,18 @@ def edit_form(form, set_id):
             new_sides.append(side)
         db.engine.execute(Side_SQL.__table__.insert(), new_sides)
 
-    old_sides = len(sides)
+    # old_sides = len(sides)
 
     # update cards
     cards = db.session.query(Card_SQL).filter_by(set_id=set_id).all()
     card_fields = dict(filter(lambda elem: 'cell' in elem[0] and '][0]' in elem[0] and 'cell[0]' not in elem[0], form.items()))
+    if len(card_fields) < len(cards): # delete removed cards
+        for i in range(len(card_fields), len(cards)):
+            db.session.query(Cell_SQL).filter_by(card_id=cards[i].card_ID).delete()
+            db.session.query(Card_SQL).filter_by(card_ID=cards[i].card_ID).delete()
+            # cards[i].delete()
+        db.session.commit()
+
     # existing cards don't need to be updated
 
     new_cards = []
@@ -182,7 +197,7 @@ def edit_form(form, set_id):
             new_cards.append(card)
         print(new_cards)
         db.engine.execute(Card_SQL.__table__.insert(), new_cards)
-    old_cards = len(cards)
+    num_cards = min(len(cards), len(card_fields))
 
     # update cells
     cards = db.session.query(Card_SQL).filter_by(set_id=set_id).all()
@@ -192,7 +207,7 @@ def edit_form(form, set_id):
     cells = []
     for i in range(len(cards)):
         for j in range(len(sides)):
-            if i < old_cards and j < old_sides: # update existing cell
+            if i < num_cards and j < num_sides: # update existing cell
                 cell = db.session.query(Cell_SQL).filter_by(card_id=cards[i].card_ID, side_id=sides[j].side_id).one()
                 cell.info = form['cell[' + str(i+1) + '][' + str(j) + ']']
                 db.session.commit()
