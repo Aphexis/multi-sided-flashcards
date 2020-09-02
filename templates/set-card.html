@@ -7,9 +7,9 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ set.num_cards() }} cards, {{ set.num_sides() }} sides</h6>
             <p class="card-text">{{ set.description }}</p>
         </div>
-        <a href="{{ url_for('home.profile', user_id=user.id, username=user.name) }}" style="z-index: 2; position: relative">
+        <a href="{{ url_for('home.profile', username=user.name) }}" style="z-index: 2; position: relative">
         <div class="card-footer text-muted">
-            <img src="{{ url_for('static', filename=user.avatar) }}" style="width:10%"><h6 class="ml-2" style="display: inline-block">{{ user.name }} (#{{ user.id }})</h6>
+            <img src="{{ url_for('static', filename=user.avatar) }}" style="width:10%"><h6 class="ml-2" style="display: inline-block">{{ user.name }}</h6>
         </div></a>
     </div>
 </div>

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -23,6 +23,9 @@ app.register_blueprint(set_blueprint, url_prefix = '/set')
 app.register_blueprint(api_blueprint, url_prefix = '/api')
 app.register_blueprint(auth_blueprint)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('not_found.html'), 404
 
 if __name__ == '__main__':
     app.run()

@@ -1,14 +1,4 @@
 from flashcard import Set, Card
-# from models import Set_SQL, Side_SQL, Card_SQL, Cell_SQL
-# from sqlalchemy.orm import sessionmaker
-# from sqlalchemy import insert
-# import os
-#
-# from sqlalchemy import create_engine
-# engine = create_engine('mysql://root:' + os.environ.get('password') + '@localhost/flashcards?auth_plugin=mysql_native_password')
-# # Session = sessionmaker(bind=engine)
-# # session = Session()
-# conn = engine.connect()
 from models import db, Set_SQL, Card_SQL, Side_SQL, Cell_SQL, User
 
 ### READ
@@ -29,8 +19,6 @@ def query_cards(id):  # returns an array of Card objects for a given set_id
         cards.append(card)
     return cards
 
-# print(query_cards(25))
-
 def query_sides(set_id):  # returns a dictionary of {id_name: [order, name, set_id]} for a given set_id
     records = db.session.query(Side_SQL).filter_by(set_id=set_id).all()
     sides = {}
@@ -39,10 +27,8 @@ def query_sides(set_id):  # returns a dictionary of {id_name: [order, name, set_
     return sides
 
 def query_sets(records):  # returns an array of all sets in [set_id, name, description, user_id, public]
-    # records = db.session.query(Set_SQL).all()
     sets = []
     for record in records:
-        # user = db.session.query(User).filter_by(id=record.user_id).one()
         set = [record.set_id, record.name, record.description, record.user_id, record.public]
         sets.append(set)
     return sets
@@ -57,7 +43,6 @@ def query_sets_private(user):
     return query_sets(records)
 
 def build_sets(records):  # builds an array of Set objects for all sets in db using query methods
-    # records = query_sets()
     sets = []
     for record in records:
         set = Set(record[0], record[1], record[2], query_sides(record[0]), query_cards(record[0]), record[3], record[4])
@@ -71,11 +56,13 @@ def build_sets_private(user):
     return build_sets(query_sets_private(user))
 
 def get_set(set_id):  # builds a Set object for a given set_id
-    record = db.session.query(Set_SQL).filter_by(set_id=set_id).one()
-    user = db.session.query(User).filter_by(id=record.user_id).one()
-    set = Set(record.set_id, record.name, record.description, query_sides(record.set_id), query_cards(record.set_id), record.user_id, record.public)
-    return set
-
+    try:
+        record = db.session.query(Set_SQL).filter_by(set_id=set_id).one()
+        user = db.session.query(User).filter_by(id=record.user_id).one()
+        set = Set(record.set_id, record.name, record.description, query_sides(record.set_id), query_cards(record.set_id), record.user_id, record.public)
+        return set
+    except:
+        return None
 
 ### WRITE
 def process_form(form, user):
@@ -85,10 +72,7 @@ def process_form(form, user):
     db.session.add(ins)
     db.session.commit()
     set_id = ins.set_id
-    # ins = insert(Set_SQL).values(name=form['name'], description=form['description'])
-    # set_result = conn.execute(ins)
-    # set_id = set_result.inserted_primary_key[0]
-    print(set_id)
+    # print(set_id)
 
     # create sides
     sides = []
@@ -99,10 +83,7 @@ def process_form(form, user):
             db.session.add(ins_side)
             db.session.commit()
             side_id = ins_side.side_id
-            # ins_side = insert(Side_SQL).values(set_id=set_id, name=form[field])
-            # side_result = conn.execute(ins_side)
-            # side_id = side_result.inserted_primary_key[0]
-            print(side_id)
+            # print(side_id)
         else:
             side = {'set_id': set_id, 'name': form[field]}
             sides.append(side)
@@ -118,10 +99,7 @@ def process_form(form, user):
             db.session.add(ins_card)
             db.session.commit()
             card_id = ins_card.card_ID
-            # ins_card = insert(Card_SQL).values(set_id=set_id)
-            # card_result = conn.execute(ins_card)
-            # card_id = card_result.inserted_primary_key[0]
-            print(card_id)
+            # print(card_id)
         else:
             card = {'set_id': set_id}
             cards.append(card)
@@ -131,7 +109,6 @@ def process_form(form, user):
     # create cells
     cells = []
     cell_fields = dict(filter(lambda elem: 'cell' in elem[0] and 'cell[0]' not in elem[0], form.items()))
-    # records = session.query(Card_SQL.card_ID).filter_by(set_id=id).all()
     # print(records)
     for field in cell_fields:
         card_index = int(field[5:6])-1
@@ -207,7 +184,7 @@ def edit_form(form, set_id):
     cells = []
     for i in range(len(cards)):
         for j in range(len(sides)):
-            if i < num_cards and j < num_sides: # update existing cell
+            if i < num_cards and j < num_sides:  # update existing cell
                 cell = db.session.query(Cell_SQL).filter_by(card_id=cards[i].card_ID, side_id=sides[j].side_id).one()
                 cell.info = form['cell[' + str(i+1) + '][' + str(j) + ']']
                 db.session.commit()

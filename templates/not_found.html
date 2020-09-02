@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/not_found.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="NotFound">
+        <img src="{{ url_for('static',filename='avatars/404_not_found.png') }}" class="NotFoundLogo" alt="404 Not Found">
+        <div class="NotFoundBody">
+            <h1>We searched high and low...</h1>
+            <p>But we couldn't find the page you were looking for!</p>
+            <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{ url_for('home.home') }}'">Go back home</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modalTitle %}Oh no, you've wandered off!{% endblock %}
+{% block modalContent %}
+    <p>On a user's profile, you can view their avatar, bio, and sets!</p>
+{#    <p>If this is your own set, you can also click the button on the right side to edit your profile information.</p>#}
+{% endblock %}

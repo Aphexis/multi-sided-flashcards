@@ -11,7 +11,7 @@
             <img src="{{ url_for('static', filename=user.avatar) }}" style="width:100%">
         </div>
         <div class="col-9 my-auto">
-            <h1>{{ user.name }} (#{{ user.id }})</h1>
+            <h1>{{ user.name }}</h1>
             {% if user.bio %}
                 <h6><i>{{ user.bio }}</i></h6>
             {% endif %}
