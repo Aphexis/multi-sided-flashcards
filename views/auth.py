@@ -14,7 +14,7 @@ def login():
         return redirect(url_for('home.home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(name=form.username.data).first()
+        user = User.query.filter(User.name.ilike(form.username.data)).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password!', "error")
             return redirect(url_for('auth.login'))
@@ -56,10 +56,8 @@ def settings():
     #            4: 'avatar pink', 5: 'avatar purple', 6: 'avatar red', 7: 'avatar yellow'}
     avatars = {}
     for filename in os.listdir('static/avatars'):
-        if filename != "edit.png" and filename != "edit-white.png":
-            fullpath = 'avatars/' + filename
-            avatars[fullpath] = True if fullpath == current_user.avatar else False
-            # avatars.append(os.path.join('static/avatars', filename))
+        fullpath = 'avatars/' + filename
+        avatars[fullpath] = True if fullpath == current_user.avatar else False
     if request.method == 'POST' and 'avatarForm' in request.form:
         user = db.session.query(User).filter_by(id=current_user.id).one()
         avatar = request.form['avatar']
@@ -67,7 +65,6 @@ def settings():
         db.session.commit()
         flash('Avatar image changed!', "success")
         return redirect(url_for('auth.settings'))
-        # return redirect(url_for('home.home'))
     form = SettingsForm(username=current_user.name, email=current_user.email, bio=current_user.bio)
     if form.validate_on_submit():
         if current_user.check_password(form.password.data):
@@ -82,5 +79,4 @@ def settings():
             return redirect(url_for('home.profile', user_id=current_user.id, username=current_user.name))
         else:
             flash('Incorrect password!', "error")
-            # return redirect(url_for('home.profile', user_id=current_user.id, username=current_user.name))
     return render_template('settings.html', current_user=current_user, form=form, avatars=avatars)

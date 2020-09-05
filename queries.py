@@ -2,7 +2,7 @@ from flashcard import Set, Card
 from models import db, Set_SQL, Card_SQL, Side_SQL, Cell_SQL, User
 
 ### READ
-def query_cells(card_id):  # returns a dictionary of cells {side_id: [info, card_id]} in the f for a given card_id
+def query_cells(card_id):  # returns a dictionary of cells {side_id: [info, card_id]} for a given card_id
     records = db.session.query(Cell_SQL).filter_by(card_id=card_id).all()
     cells = {}
     for record in records:
@@ -26,19 +26,19 @@ def query_sides(set_id):  # returns a dictionary of {id_name: [order, name, set_
         sides[record.side_id] = [record.side_order, record.name, record.set_id]
     return sides
 
-def query_sets(records):  # returns an array of all sets in [set_id, name, description, user_id, public]
+def query_sets(records):  # returns an array of all sets where each set is an array of form [set_id, name, description, user_id, public]
     sets = []
     for record in records:
         set = [record.set_id, record.name, record.description, record.user_id, record.public]
         sets.append(set)
     return sets
 
-def query_sets_public(user):
+def query_sets_public(user): # returns all publicly visible sets
     records = db.session.query(Set_SQL).filter_by(public=True).all()
     all_records = query_sets(records)
     return all_records
 
-def query_sets_private(user):
+def query_sets_private(user): # returns all privately visible sets for a given user
     records = db.session.query(Set_SQL).filter_by(user_id=user.id).all()
     return query_sets(records)
 
@@ -49,10 +49,10 @@ def build_sets(records):  # builds an array of Set objects for all sets in db us
         sets.append(set)
     return sets
 
-def build_sets_public(user):
+def build_sets_public(user): # builds an array of Set objects for all public sets
     return build_sets(query_sets_public(user))
 
-def build_sets_private(user):
+def build_sets_private(user): # builds an array of Set objects for all private sets of a given user
     return build_sets(query_sets_private(user))
 
 def get_set(set_id):  # builds a Set object for a given set_id
@@ -65,7 +65,7 @@ def get_set(set_id):  # builds a Set object for a given set_id
         return None
 
 ### WRITE
-def process_form(form, user):
+def process_form(form, user): # creates a set owned by the given user using the given form data
     # create set
     public = True if form.getlist('public') else False
     ins = Set_SQL(name=form['name'], description=form['description'], user=user, public=public)
@@ -119,7 +119,7 @@ def process_form(form, user):
         cells.append(cell)
     cells_result = db.engine.execute(Cell_SQL.__table__.insert(), cells)
 
-def edit_form(form, set_id):
+def edit_form(form, set_id): # modifies a given set based on form data
     # update set info
     record = db.session.query(Set_SQL).filter_by(set_id=set_id).one()
     public = True if form.getlist('public') else False
@@ -134,12 +134,12 @@ def edit_form(form, set_id):
     sides = db.session.query(Side_SQL).filter_by(set_id=set_id).all()
     side_fields = dict(filter(lambda elem: 'cell[0]' in elem[0], form.items()))
     num_sides = min(len(sides), len(side_fields))
-    for i in range(num_sides): # update existing sides
+    for i in range(num_sides):  # update existing sides
         side = sides[i]
         side.name = form['cell[0][' + str(i) + ']']
     db.session.commit()
 
-    if len(side_fields) < len(sides): # delete removed sides
+    if len(side_fields) < len(sides):  # delete removed sides
         for i in range(len(side_fields), len(sides)):
             db.session.query(Cell_SQL).filter_by(side_id=sides[i].side_id).delete()
             db.session.query(Side_SQL).filter_by(side_id=sides[i].side_id).delete()
@@ -147,7 +147,7 @@ def edit_form(form, set_id):
         db.session.commit()
 
     new_sides = []
-    if len(side_fields) > len(sides): # new sides
+    if len(side_fields) > len(sides):  # new sides
         for i in range(len(sides), len(side_fields)):
             side = {'set_id': set_id, 'name': form['cell[0][' + str(i) + ']']}
             new_sides.append(side)
@@ -158,7 +158,7 @@ def edit_form(form, set_id):
     # update cards
     cards = db.session.query(Card_SQL).filter_by(set_id=set_id).all()
     card_fields = dict(filter(lambda elem: 'cell' in elem[0] and '][0]' in elem[0] and 'cell[0]' not in elem[0], form.items()))
-    if len(card_fields) < len(cards): # delete removed cards
+    if len(card_fields) < len(cards):  # delete removed cards
         for i in range(len(card_fields), len(cards)):
             db.session.query(Cell_SQL).filter_by(card_id=cards[i].card_ID).delete()
             db.session.query(Card_SQL).filter_by(card_ID=cards[i].card_ID).delete()
@@ -168,7 +168,7 @@ def edit_form(form, set_id):
     # existing cards don't need to be updated
 
     new_cards = []
-    if len(card_fields) > len(cards): # new cards
+    if len(card_fields) > len(cards):  # new cards
         for i in range(len(cards), len(card_fields)):
             card = {'set_id': set_id}
             new_cards.append(card)
@@ -195,7 +195,7 @@ def edit_form(form, set_id):
         db.engine.execute(Cell_SQL.__table__.insert(), cells)
 
 ### DELETE
-def delete_set(set_id):
+def delete_set(set_id):  # deletes a given set
     sides = query_sides(set_id)
     for side in sides:
         db.session.query(Cell_SQL).filter_by(side_id=side).delete()

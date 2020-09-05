@@ -1,16 +1,8 @@
-# from sqlalchemy import Column, ForeignKey, String
-# from sqlalchemy.dialects.mysql import INTEGER
-# from sqlalchemy.orm import relationship
-# from sqlalchemy.ext.declarative import declarative_base
 from app import db
 from app import login
-# from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Base = declarative_base()
-# metadata = Base.metadata
-# db = SQLAlchemy()
 class User(UserMixin, db.Model):
     # """User account model."""
     __tablename__ = 'users'

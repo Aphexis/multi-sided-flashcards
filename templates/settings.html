@@ -8,10 +8,9 @@
     <h1>Settings</h1>
     <div class="row mt-4">
         <div class="col-2">
-{#            <img src="{{ current_user.avatar }}" style="width:100%;">#}
             <div class="avatarCol">
                 <img src="{{ url_for('static', filename=current_user.avatar) }}" class="image">
-                <img src="{{ url_for('static', filename='avatars/edit-white.png') }}" class="imageHover" data-toggle="modal" data-target="#avatarModal">
+                <img src="{{ url_for('static', filename='images/edit-white.png') }}" class="imageHover" data-toggle="modal" data-target="#avatarModal">
             </div>
         </div>
         <div class="col-10">

@@ -1,3 +1,6 @@
+// This file contains all dynamic-form related logic for adding and removing rows/cols using jQuery
+
+// Adds a row of form fields to the given table
 function addRow(tableID) {
     let tableRef = document.getElementById(tableID);
     let rows = document.getElementById(tableID).rows.length;
@@ -37,6 +40,7 @@ function addRow(tableID) {
     }
 }
 
+// Adds a column of form fields to the given table
 function addCol(tableID) {
     let tableRef = document.getElementById(tableID);
     let rows = document.getElementById(tableID).rows.length - 1;
@@ -79,30 +83,27 @@ function addCol(tableID) {
     }
 }
 
-// renumbers all fields appropriately (in case of row/col removal)
+// Renumbers all fields appropriately (in case of row/col removal that isn't the last row/col)
 function renumber(rows, numRows, numCols) {
-    console.log("renumbering");
-    console.log(numRows);
-    console.log(numCols);
-    for (var i=1; i<numRows; i++) {
-        console.log("on row "  + i);
+    // console.log("renumbering", numRows, numCols);
+    for (var i=1; i<numRows - 1; i++) {
+        // console.log("on row ", i);
         var currRow = rows[i];
-        // console.log("editing a row");
-        console.log(currRow);
+        // console.log("editing a row", currRow);
         for (var j=1; j<numCols-2; j++) {
             console.log("on col " + j);
             let cellName = 'cell[' + Number(i-1) + '][' + Number(j - 1) + ']';
-            console.log(cellName);
             currRow.cells[j].children[0].setAttribute('name', cellName);
             if (i == 1) {
                 currRow.cells[j].children[0].setAttribute('placeholder', 'Side ' + j + ' Name')
-            } else {
+            // } else { // sets a placeholder name (for debugging)
                 // currRow.cells[j].children[0].setAttribute('placeholder', cellName);
             }
         }
     }
 }
 
+// Removes a given row of form fields from the table if possible
 function removeRow(tableID, row) {
     let rows = document.getElementById(tableID).rows;
     let numRows = document.getElementById(tableID).rows.length-1;
@@ -118,9 +119,9 @@ function removeRow(tableID, row) {
     }
 }
 
+// Removes a given column of form fields from the table if possible
 function removeCol(tableID, col) {
     let cols = document.getElementById(tableID).rows[1].cells.length;
-    console.log(cols);
     if (cols == 3) {
         alert("You cannot remove all sides from your set!");
         return;
@@ -129,14 +130,14 @@ function removeCol(tableID, col) {
         "Are you sure you want to do this?")) {
         let rows = document.getElementById(tableID).rows;
         let numRows = document.getElementById(tableID).rows.length - 1;
-        for (var i = 0; i < numRows; i++) {
+        for (var i = 0; i < numRows - 1; i++) {
             rows[i].deleteCell(col + 1);
         }
-        console.log("doing renumbering for cols");
         renumber(rows, numRows, cols);
     }
 }
 
+// Exits the editing page
 function exit_edit(){
     if (window.confirm("You are exiting editing. This will discard all your changes! " +
         "Are you sure you want to do this?")) {
