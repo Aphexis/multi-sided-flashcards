@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
+from sqlalchemy import exc
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -28,6 +29,11 @@ def page_not_found(e):
 
 @app.errorhandler(500)
 def internal_server_error(e):
+    return render_template('500_error.html'), 500
+
+@app.errorhandler(exc.SQLAlchemyError)
+def sql_alchemy_error(e):
+    print(e)
     return render_template('500_error.html'), 500
 
 if __name__ == '__main__':
