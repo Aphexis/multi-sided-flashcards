@@ -1,5 +1,6 @@
 from flashcard import Set, Card
 from models import db, Set_SQL, Card_SQL, Side_SQL, Cell_SQL, User
+from sqlalchemy import desc
 
 ### READ
 def query_cells(card_id):  # returns a dictionary of cells {side_id: [info, card_id]} for a given card_id
@@ -34,12 +35,12 @@ def query_sets(records):  # returns an array of all sets where each set is an ar
     return sets
 
 def query_sets_public(user): # returns all publicly visible sets
-    records = db.session.query(Set_SQL).filter_by(public=True).all()
+    records = db.session.query(Set_SQL).filter_by(public=True).order_by(desc(Set_SQL.set_id)).all()
     all_records = query_sets(records)
     return all_records
 
 def query_sets_private(user): # returns all privately visible sets for a given user
-    records = db.session.query(Set_SQL).filter_by(user_id=user.id).all()
+    records = db.session.query(Set_SQL).filter_by(user_id=user.id).order_by(desc(Set_SQL.set_id)).all()
     return query_sets(records)
 
 def build_sets(records):  # builds an array of Set objects for all sets in db using query methods
