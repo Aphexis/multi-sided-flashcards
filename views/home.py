@@ -54,9 +54,20 @@ def create_set():
         return redirect(url_for('home.home'))
     return render_template('create.html')
 
-@home_blueprint.route('/<int:user_id>/<string:username>')
-def profile(user_id, username):
-    user = User.query.filter_by(id=user_id).one()
+@home_blueprint.route('/profile/<string:username>')
+def profile(username):
+    # user = User.query.filter_by(id=user_id).one()
+    user = User.query.filter(User.name.ilike(username)).first()
+    if not user:
+        return render_template('not_found.html')
     sets = build_sets_private(user)
-    your_profile = True if current_user.is_authenticated and user_id == current_user.id else False
+    your_profile = True if current_user.is_authenticated and username == current_user.name else False
     return render_template('profile.html', user=user, sets=sets, your_profile=your_profile)
+
+@home_blueprint.route('/not-found')
+def not_found():
+    return render_template('not_found.html')
+
+@home_blueprint.route('/error')
+def error():
+    return render_template('500_error.html')

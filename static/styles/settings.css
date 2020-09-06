@@ -39,5 +39,3 @@ input[type="radio"]:checked + .avatar {
 .avatar:hover {
   border-color: lightsteelblue;
 }
-
-

@@ -8,6 +8,8 @@ from models import User
 @set_blueprint.route('/<int:set_id>') 
 def set(set_id):
     set = get_set(set_id)
+    if not set:
+        return render_template('not_found.html')
     if current_user.is_authenticated and set.user == current_user.id:
         set_info = set.get_card_info()
         return render_template('set.html', set=set, set_info=set_info, view_only=False, user=current_user)
@@ -26,6 +28,8 @@ def edit(set_id):
         edit_form(request.form, set_id)
         return redirect(url_for('set.set', set_id=set_id))
     set = get_set(set_id)
+    if not set:
+        return render_template('not_found.html')
     if current_user.is_authenticated and set.user == current_user.id:
         return render_template('set-edit.html', set=set)
     elif set.public:
@@ -38,6 +42,8 @@ def edit(set_id):
 @set_blueprint.route('/<int:set_id>/study')
 def study(set_id):
     set = get_set(set_id)
+    if not set:
+        return render_template('not_found.html')
     if set.public or (current_user.is_authenticated and set.user == current_user.id):
         return render_template('set-study.html', set=set)
     else:
@@ -48,6 +54,8 @@ def study(set_id):
 @login_required
 def delete(set_id):
     set = get_set(set_id)
+    if not set:
+        return render_template('not_found.html')
     if current_user.is_authenticated and set.user == current_user.id:
         delete_set(set_id)
         flash("Set '" + set.name + "' was deleted!", "success")

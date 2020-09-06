@@ -7,6 +7,16 @@
 
 {% block body %}
     {% from 'set-card.html' import card %}
+    {% if not current_user.is_authenticated %}
+        <div class="title-text"><h1>Welcome to Flexcards! 🎉</h1></div>
+        <div class="home-body">
+            <h4>Study flashcards with 3+ sides using Flexcards. After all, why be limited to just a front and back?</h4>
+            <p><strong>Want to explore?</strong>
+                Take a look from some flashcard sets recently created by the community below,
+                or <a href="{{ url_for('auth.signup') }}">sign up</a> to start creating your own flashcards.
+                You can also click a user's name to view their profile,
+                or click the info icon in the navbar to view information about each page.</p></div>
+    {% endif %}
     {% if current_user.is_authenticated %}
         <div class="title-text"><h1>My Sets</h1></div>
         {% if private_sets %}
@@ -39,7 +49,8 @@
 {% block modalTitle %}Home{% endblock %}
 {% block modalContent %}
     <p>Welcome to the Flexcards homepage! 🗃</p>
-    <p>Here, you can view the most recently created sets.</p>
+    <p>Flexcards is a web app for creating and studying multi-sided flashcards.
+        Here, you can view the most recently created sets.</p>
     <p>Try clicking a set to view it, or click the creator of a set to view their profile!
         If you're logged in, you can also use the options in the navbar above to create a set or view more sets.</p>
 {% endblock %}

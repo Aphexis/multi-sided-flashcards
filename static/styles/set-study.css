@@ -22,9 +22,19 @@
     /*box-sizing: border-box;*/
 }
 
-/*.card {*/
-/*    border: 1px solid lightslategray;*/
-/*    border-radius: 5px;*/
-/*    box-shadow: 0 .25rem .5rem rgba(0,0,0,.075);*/
-/*    height: 100%;*/
-/*}*/
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-hr {
+    margin-left: 0;
+    margin-right: 0;
+    width: 75%;
+}
+
+.card-text {
+    flex-basis: 40%;
+}

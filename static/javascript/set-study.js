@@ -1,5 +1,5 @@
+// Displays a specific card and side
 function loadCard(set_id, side_num, card_num, total_cards, sides, cards, side_order) {
-    // console.log(sides);
     let nextSide = side_num+1 < sides.length ? sides[side_order[side_num+1]] : sides[side_order[1]];
     if ($('.card').length) {
         $("#nextSideText").text("Next: " + nextSide);
@@ -27,12 +27,13 @@ function loadCard(set_id, side_num, card_num, total_cards, sides, cards, side_or
         .text(card_num+1 + "/" + total_cards + " cards studied");
 }
 
+// Displays "studying complete" UI
 function loadDone(set_id, total_cards) {
     $("#body").load("../../api/study_done?set=" + set_id,
         function( response, status, xhr ) {
             if ( status == "error" ) {
                 console.log("Error occured");
-                var msg = "Sorry but there was an error: ";
+                var msg = "Oops, there was an error: ";
                 $( "#body" ).html( msg + xhr.status + " " + xhr.statusText );
             }
         });
@@ -50,14 +51,13 @@ function shuffleArray(array) {
 }
 
 $(document).ready(function(){
-    console.log("jQuery connected!");
     let pathArray = window.location.pathname.split('/');
     let set_id = pathArray[2];
     let total_sides, total_cards, sides, cards, cards_shuffled;
     let side_order = {};
     $.get("../../api/set_info?set=" + set_id, function(data, status){
         if ( status == "error" ) {
-            console.log("Error occured: " + xhr.status + " " + xhr.statusText);
+            console.error("Error occured: " + xhr.status + " " + xhr.statusText);
         } else {
             total_sides = data.num_sides;
             total_cards = data.num_cards;
@@ -85,17 +85,15 @@ $(document).ready(function(){
             side_order[index+1] = currElement;
         });
         restart();
-        // console.log(side_order);
         $('#settingsModal').modal('hide');
     });
 
     // Card/Side navigation
     function nextCard() {
-        console.log("clicking nextCard");
+        // console.log("clicking nextCard");
         card_num++;
-        console.log({card_num: card_num, total_cards: total_cards});
+        // console.log({card_num: card_num, total_cards: total_cards});
         if (card_num >= total_cards) {
-            console.log("past total cards");
             loadDone(set_id, total_cards);
             card_num = total_cards;
             return;
@@ -103,7 +101,7 @@ $(document).ready(function(){
         loadCard(set_id, side_num, card_num, total_cards, sides, cards_shuffled, side_order);
     }
     function prevCard() {
-        console.log("clicking prevCard");
+        // console.log("clicking prevCard");
         card_num--;
         if (card_num < 0) {
             card_num = 0;
@@ -112,7 +110,7 @@ $(document).ready(function(){
         loadCard(set_id, side_num, card_num, total_cards, sides, cards_shuffled, side_order);
     }
     function nextSide() {
-        console.log("clicking nextSide");
+        // console.log("clicking nextSide");
         // console.log({side_num: side_num, total_sides: total_sides});
         if (card_num == total_cards) return;
         side_num++;
@@ -130,18 +128,19 @@ $(document).ready(function(){
         loadCard(set_id, side_num, card_num, total_cards, sides, cards_shuffled, side_order);
     }
     function restart() {
-        console.log("clicking restart");
+        // console.log("clicking restart");
         side_num = 1;
         card_num = 0;
         loadCard(set_id, side_num, card_num, total_cards, sides, cards_shuffled, side_order);
     }
 
     function shuffle() {
-        console.log("shuffling cards");
+        // console.log("shuffling cards");
         shuffleArray(cards_shuffled);
         restart();
     }
 
+    // set click handlers
     $("#body").on("click", "#nextCard", function() {
         nextCard()
     });
@@ -161,6 +160,7 @@ $(document).ready(function(){
         shuffle();
     });
 
+    // set key handlers
     $(document).keydown(function (e) {
         var key = { left: 37, up: 38, right: 39, down: 40, R: 82, S: 83 };
 

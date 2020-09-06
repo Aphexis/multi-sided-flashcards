@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/not_found.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="NotFound">
+        <img src="{{ url_for('static',filename='images/500_error.png') }}" class="NotFoundLogo" alt="500 Error">
+        <div class="NotFoundBody">
+            <h1>Oh no, something went wrong!</h1>
+            <p>We're really sorry, try refreshing the page or coming back later!</p>
+            <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{ url_for('home.home') }}'">Go back home</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modalTitle %}Oh no, there was an error!{% endblock %}
+{% block modalContent %}
+    <p>We're really sorry, try refreshing the page or coming back later!</p>
+{% endblock %}

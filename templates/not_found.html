@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/not_found.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="NotFound">
+        <img src="{{ url_for('static',filename='images/404_not_found.png') }}" class="NotFoundLogo" alt="404 Not Found">
+        <div class="NotFoundBody">
+            <h1>We searched high and low...</h1>
+            <p>But we couldn't find the page you were looking for!</p>
+            <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{ url_for('home.home') }}'">Go back home</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modalTitle %}Oh no, you've wandered off!{% endblock %}
+{% block modalContent %}
+    <p>We couldn't find the page you were looking for.</p>
+    <p>If you were looking for a set or user profile, make sure that it hasn't been deleted or renamed!</p>
+{% endblock %}

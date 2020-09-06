@@ -1,3 +1,5 @@
+# Class and object representations for database tables
+
 class Set:
     def __init__ (self, id_num, name, description, sides, cards, user, public):
         # add side_names and card_info as properties?

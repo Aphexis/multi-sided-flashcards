@@ -52,7 +52,7 @@
                 {% if current_user.is_authenticated %}
                     <span class="dropdown show dropleft">
                       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ current_user.name }} (#{{ current_user.id }})
+                        {{ current_user.name }}
                       </a>
 
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -62,7 +62,7 @@
                       </div>
                     </span>
                 {% else %}
-                    <a class="navbar-text text-right" href="{{ url_for('auth.login') }}">Log in</a>
+                    <a class="navbar-text text-right" href="{{ url_for('auth.signup') }}">Sign up</a>
                 {% endif %}
         </div>
     </nav>

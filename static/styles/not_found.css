@@ -1,0 +1,26 @@
+.NotFound {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*flex-direction: column;*/
+}
+
+.NotFound .NotFoundLogo {
+    /*width: 50%;*/
+    height: 70%;
+    margin-right: 50px;
+}
+
+.NotFoundBody {
+    flex-direction: column;
+}
+
+.NotFoundBody p {
+    font-size: 22px;
+}
+
+.NotFoundBody button {
+    margin-top: 25px;
+    width: 100%;
+}
