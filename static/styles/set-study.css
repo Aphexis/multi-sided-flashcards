@@ -38,3 +38,8 @@
 .card-text {
     flex-basis: 40%;
 }
+
+.card-header, .card-footer {
+    user-select: none;
+    cursor: pointer;
+}
