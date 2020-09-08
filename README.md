@@ -3,6 +3,13 @@ Flexcards is a web app that allows users to create and study from flashcards wit
 
 The backend is built using Flask and Python, connected to a Postgres database using SQLAlchemy. The frontend is built using HTML, CSS, JavaScript (jQuery), and Bootstrap. 
 
+### Development
+**Setup:**
+[Create and activate a virtual environment](https://docs.python.org/3/library/venv.html), then run `pip install -r requirements.txt` to install all dependencies.
+
+**Development:**
+To start the server, run `python -m flask run`.
+
 ## Take a tour!
 #### View a set
 ![view a set](https://imgur.com/iZdxF50.png)
