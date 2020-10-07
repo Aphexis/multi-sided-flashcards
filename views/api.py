@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, json
 api_blueprint = Blueprint('api', __name__, template_folder='templates')
-from sqlalchemy.orm import sessionmaker
 from queries import get_set
 
 @api_blueprint.route('/set_info', methods=['GET'])

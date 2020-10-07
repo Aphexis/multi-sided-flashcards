@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 set_blueprint = Blueprint('set', __name__, template_folder='templates')
-from sqlalchemy.orm import sessionmaker
 from queries import get_set, delete_set, edit_form
 from flask_login import current_user, login_required
 from models import User
@@ -64,5 +63,5 @@ def delete(set_id):
         flash("You are not authorized to delete this set!", "error")
         return redirect(url_for('set.set', set_id=set_id))
     else:
-        flash("You are not authorized to view this set!", "error")
+        flash("You are not authorized to delete this set!", "error")
         return redirect(url_for('home.home'))

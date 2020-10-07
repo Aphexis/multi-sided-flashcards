@@ -6,6 +6,7 @@ from werkzeug.urls import url_parse
 from app import db
 import os
 import random
+
 auth_blueprint = Blueprint('auth', __name__, template_folder='templates')
 
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
@@ -52,8 +53,6 @@ def signup():
 @auth_blueprint.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
-    # avatars = {0: 'avatar lightblue', 1: 'avatar lightgreen', 2: 'avatar lightviolet', 3: 'avatar orange',
-    #            4: 'avatar pink', 5: 'avatar purple', 6: 'avatar red', 7: 'avatar yellow'}
     avatars = {}
     for filename in os.listdir('static/avatars'):
         fullpath = 'avatars/' + filename

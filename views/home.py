@@ -38,7 +38,6 @@ def my_sets():
 @home_blueprint.route('/publicsets')
 def public_sets():
     public_sets = build_sets_public(current_user)
-    # private_sets = build_sets_private(current_user) if current_user.is_authenticated else None
     users = {}
     for set in public_sets:
         if set.user not in users:
@@ -56,7 +55,6 @@ def create_set():
 
 @home_blueprint.route('/profile/<string:username>')
 def profile(username):
-    # user = User.query.filter_by(id=user_id).one()
     user = User.query.filter(User.name.ilike(username)).first()
     if not user:
         return render_template('not_found.html')

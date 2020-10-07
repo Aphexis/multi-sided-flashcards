@@ -11,8 +11,6 @@ login = LoginManager(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
-# app.config.from_object('config.Config')
 from views.home import home_blueprint
 from views.set import set_blueprint
 from views.api import api_blueprint
