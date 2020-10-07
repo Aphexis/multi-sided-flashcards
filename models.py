@@ -3,6 +3,7 @@ from app import login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 class User(UserMixin, db.Model):
     # """User account model."""
     __tablename__ = 'users'
@@ -44,6 +45,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.name)
 
+
 class Set_SQL(db.Model):
     __tablename__ = 'sets'
 
@@ -54,6 +56,7 @@ class Set_SQL(db.Model):
     public = db.Column(db.Boolean, nullable=False)
 
     user = db.relationship('User')
+
 
 class Card_SQL(db.Model):
     __tablename__ = 'cards'
@@ -90,6 +93,7 @@ class Cell_SQL(db.Model):
     card = db.relationship('Card_SQL', cascade="delete")
     side = db.relationship('Side_SQL', cascade="delete")
 
+
 @login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+def load_user(user_id):
+    return User.query.get(int(user_id))

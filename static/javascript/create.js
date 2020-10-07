@@ -131,6 +131,7 @@ function removeCol(tableID, col) {
         let rows = document.getElementById(tableID).rows;
         let numRows = document.getElementById(tableID).rows.length - 1;
         for (var i = 0; i < numRows; i++) {
+            console.log('deleting cell', i)
             rows[i].deleteCell(col + 1);
         }
         renumber(rows, numRows, cols);

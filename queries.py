@@ -12,8 +12,6 @@ def query_cells(card_id):  # returns a dictionary of cells {side_id: [info, card
 
 def query_cards(id):  # returns an array of Card objects for a given set_id
     records = db.session.query(Card_SQL).filter_by(set_id=id).all()
-    print("querying cards")
-    print(records)
     cards = []
     for record in records:
         card = Card(record.card_ID, record.card_order, query_cells(record.card_ID), record.set_id)
@@ -73,7 +71,6 @@ def process_form(form, user): # creates a set owned by the given user using the 
     db.session.add(ins)
     db.session.commit()
     set_id = ins.set_id
-    # print(set_id)
 
     # create sides
     sides = []
@@ -84,7 +81,6 @@ def process_form(form, user): # creates a set owned by the given user using the 
             db.session.add(ins_side)
             db.session.commit()
             side_id = ins_side.side_id
-            # print(side_id)
         else:
             side = {'set_id': set_id, 'name': form[field]}
             sides.append(side)
@@ -100,7 +96,6 @@ def process_form(form, user): # creates a set owned by the given user using the 
             db.session.add(ins_card)
             db.session.commit()
             card_id = ins_card.card_ID
-            # print(card_id)
         else:
             card = {'set_id': set_id}
             cards.append(card)
@@ -109,13 +104,10 @@ def process_form(form, user): # creates a set owned by the given user using the 
 
     # create cells
     cells = []
-    cell_fields = dict(filter(lambda elem: 'cell' in elem[0] and 'cell[0]' not in elem[0], form.items()))
-    # print(records)
+    cell_fields = dict(filter(lambda elem: 'cell' in elem[0] and 'cell[0]' not in elem[0], form.items())) # non-"side name" cells
     for field in cell_fields:
         card_index = int(field[5:6])-1
         side_index = int(field[-2:-1])
-        print(card_index)
-        print(side_index)
         cell = {'card_id': card_index+card_id, 'side_id': side_id+side_index, 'info': form[field]}
         cells.append(cell)
     cells_result = db.engine.execute(Cell_SQL.__table__.insert(), cells)
@@ -129,7 +121,6 @@ def edit_form(form, set_id): # modifies a given set based on form data
     record.public = public
     db.session.commit()
     set_id = record.set_id
-    # print(set_id)
 
     # update sides
     sides = db.session.query(Side_SQL).filter_by(set_id=set_id).all()
@@ -144,7 +135,6 @@ def edit_form(form, set_id): # modifies a given set based on form data
         for i in range(len(side_fields), len(sides)):
             db.session.query(Cell_SQL).filter_by(side_id=sides[i].side_id).delete()
             db.session.query(Side_SQL).filter_by(side_id=sides[i].side_id).delete()
-            # sides[i].delete()
         db.session.commit()
 
     new_sides = []
@@ -154,8 +144,6 @@ def edit_form(form, set_id): # modifies a given set based on form data
             new_sides.append(side)
         db.engine.execute(Side_SQL.__table__.insert(), new_sides)
 
-    # old_sides = len(sides)
-
     # update cards
     cards = db.session.query(Card_SQL).filter_by(set_id=set_id).all()
     card_fields = dict(filter(lambda elem: 'cell' in elem[0] and '][0]' in elem[0] and 'cell[0]' not in elem[0], form.items()))
@@ -163,7 +151,6 @@ def edit_form(form, set_id): # modifies a given set based on form data
         for i in range(len(card_fields), len(cards)):
             db.session.query(Cell_SQL).filter_by(card_id=cards[i].card_ID).delete()
             db.session.query(Card_SQL).filter_by(card_ID=cards[i].card_ID).delete()
-            # cards[i].delete()
         db.session.commit()
 
     # existing cards don't need to be updated
@@ -196,7 +183,7 @@ def edit_form(form, set_id): # modifies a given set based on form data
         db.engine.execute(Cell_SQL.__table__.insert(), cells)
 
 ### DELETE
-def delete_set(set_id):  # deletes a given set
+def delete_set(set_id):  # deletes a given set from the db
     sides = query_sides(set_id)
     for side in sides:
         db.session.query(Cell_SQL).filter_by(side_id=side).delete()
