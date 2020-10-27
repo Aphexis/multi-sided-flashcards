@@ -7,7 +7,7 @@ cachetools==4.0.0
 cffi==1.13.2
 Click==7.0
 colorama==0.4.1
-cryptography==2.8
+cryptography==3.2
 dnspython==1.16.0
 email-validator==1.1.0
 Flask==1.1.1
