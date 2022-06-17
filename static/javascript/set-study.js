@@ -52,7 +52,8 @@ function shuffleArray(array) {
 
 $(document).ready(function(){
     let pathArray = window.location.pathname.split('/');
-    let set_id = pathArray[2];
+    let max_occur = pathArray.length;
+    let set_id = pathArray[Number(max_occur-2)];
     let total_sides, total_cards, sides, cards, cards_shuffled;
     let side_order = {};
     $.get("../../api/set_info?set=" + set_id, function(data, status){

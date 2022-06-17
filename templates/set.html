@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
     {{ super() }}
-    <script type="text/javascript" src="../static/javascript/set.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='javascript/set.js') }}"></script>
 {% endblock %}
 {% block body %}
     <div class="row">
