@@ -106,8 +106,9 @@ def process_form(form, user): # creates a set owned by the given user using the 
     cells = []
     cell_fields = dict(filter(lambda elem: 'cell' in elem[0] and 'cell[0]' not in elem[0], form.items())) # non-"side name" cells
     for field in cell_fields:
-        card_index = int(field[5:6])-1
-        side_index = int(field[-2:-1])
+        card_index = int(field[5:-1:].split('][')[0]) - 1
+        side_index = int(field[5:-1:].split('][')[1])
+        
         cell = {'card_id': card_index+card_id, 'side_id': side_id+side_index, 'info': form[field]}
         cells.append(cell)
     cells_result = db.engine.execute(Cell_SQL.__table__.insert(), cells)
